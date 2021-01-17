@@ -1,0 +1,126 @@
+\documentclass{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+	\geometry{a4paper}
+\usepackage{array}
+%\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+\begin{document}
+\begin{flushleft}
+Zaplanowane testy sprawdzające funkcjonalność zawartą w widoku okna aplikacji. \\
+(W-wariant, R-rekurencja, NULL-brak, ,,w każdym widoku''- w widoku dnia, tygodnia i mies.)
+\setlength\LTleft{-1in}
+
+	\begin{longtable}[H]{| m{3.5cm} | m{3.5cm} | m{3.5cm} | m{3.5cm} | m{3.5cm} |} \hline
+	Nazwa & Warunki wstępne & Kroki wykonania & Oczekiwany rezultat & Otrzymany rezultat \\ \hline
+
+	Wybranie dnia W1 & Użytkownik znajduje się aktualnie w widoku miesiąca. Nie został wybrany jeszcze żaden dzień & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie na dowolny z 
+	dni danego miesiąca. \end{enumerate} & Pusta połowa widoku zostaje zastąpiona widokiem wybranego dnia. & - \\ \hline
+	
+	Wybranie dnia W2 & Użytkownik znajduje się aktualnie w widoku miesiąca. Został wcześniej wybrany inny dzień. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie na dowolny z dni 
+	danego miesiąca. \end{enumerate} & Widok dnia wcześniej wybranego dnia zostaje zastąpione widokiem nowo wybranego dnia. & - \\ \hline
+
+	Zmiany strefy czasowej & Użytkownik znajduje się aktualnie w widoku miesiąca. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Otworzenie okna zmiany strefy czasowej. \item Wybór 
+	dowolnej ze stref czasowych. \end{enumerate} & Zmiana wyświetlanej strefy czasowej. Przesunięcie utworzonych wydarzeń zgodnie ze zmianą czasu. Jeśli zajdzie taka potrzeba, przesunięcie 
+	wydarzeń na poprzedni/następny dzień. & - \\ \hline
+
+	Przejście do poprzedniego miesiąca W1 & Użytkownik znajduje się aktualnie w widoku miesiąca. Aktualny miesiąc nie jest pierwszym miesiącem ze zbioru. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do poprzedniego miesiąca. \end{enumerate} & Przejście do widoku poprzedniego miesiąca. Zmiana daty, widok dnia zostaje wyczyszczony. & 
+	- \\ \hline
+
+	Przejście do poprzedniego miesiąca W2 & Użytkownik znajduje się aktualnie w widoku miesiąca. Aktualny miesiąc jest pierwszym miesiącem ze zbioru. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do poprzedniego miesiąca. \end{enumerate} & Pozostanie w widoku obecnego miesiąca. & - \\ \hline
+
+	Przejście do następnego miesiąca W1 & Użytkownik znajduje się aktualnie w widoku miesiąca. Aktualny miesiąc nie jest ostatnim miesiącem ze zbioru. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do następnego miesiąca. \end{enumerate} & Przejście do widoku następnego miesiąca. Zmiana daty, widok dnia zostaje wyczyszczony. & 
+	- \\ \hline
+
+	Przejście do następnego miesiąca W2 & Użytkownik znajduje się aktualnie w widoku miesiąca. Aktualny miesiąc jest ostatnim miesiącem ze zbioru. & \begin{enumerate}[leftmargin =*, topsep=0pt] 
+	\item Kliknięcie w strzałkę przejścia do następnego miesiąca. \end{enumerate} & Pozostanie w widoku obecnego miesiąca. & - \\ \hline
+	
+	Przejście do poprzedniego dnia W1 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień nie jest pierwszym dniem miesiąca. & \begin{enumerate}
+	[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia poprzedniego \end{enumerate} & Zmiana widoku dnia na widok dnia poprzedniego. Zmiana daty i listy aktywności. & 
+	- \\ \hline
+
+	Przejście do poprzedniego dnia W2 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień jest pierwszym dniem miesiąca, ale nie jest pierwszym dniem 
+	zbioru. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia poprzedniego. \end{enumerate} & Zmiana widoku dnia na dzień poprzedni i zmiana widoku 
+	miesiąca na poprzedni miesiąc. & - \\ \hline
+
+	Przejście do poprzedniego dnia W3 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień jest pierwszym dniem zbioru dni. & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia poprzedniego. \end{enumerate} & Pozostanie w obecnym widoku dnia. & - \\ \hline
+
+	Przejście do następnego dnia W1 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień nie jest ostatnim dniem zbioru miesiąca. & \begin{enumerate}
+	[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia następnego. \end{enumerate} & Zmiana widoku dnia na widok dnia poprzedniego. Zmiana daty i listy aktywności. & 
+	- \\ \hline
+
+	Przejście do następnego dnia W2 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień jest ostatnim dniem miesiąca, ale nie jest ostatnim dniem zbioru. 
+	& \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia następnego. \end{enumerate} & Zmiana widoku dnia na dzień następny i zmiana widoku miesiąca na 
+	następny miesiąc. & - \\ \hline
+	
+	Przejście do następnego dnia W3 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Aktualny dzień jest ostatnim dniem zbioru dni. & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w strzałkę przejścia do dnia następnego. \end{enumerate} & Pozostanie w obecnym widoku dnia. & - \\ \hline
+
+	Dodanie aktywności & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. &  \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz dodawania 
+	aktywności. \item Dodanie aktywności bez zaznaczonej opcji "recurring". \end{enumerate} & Zamknięcie się okna dodawania aktywności. Dodanie do planu (w każdym widoku) stworzonej 
+	aktywności i umieszczenie jej przy odpowiedniej godzinie. & -  \\ \hline
+
+	Dodanie aktywności R & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. &  \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz dodawania 
+	aktywności. \item Dodanie aktywności z zaznaczoną opcją "recurring". \end{enumerate} & Zamknięcie się okna dodawania aktywności. Dodanie do planu (w każdym widoku) stworzonej aktywności 
+	i umieszczenie jej przy odpowiedniej godzinie, dodanie aktywności w każdym następnym dniu o tej samej nazwie (np. w każdy pon). & -  \\ \hline
+
+	Edycja aktywności & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W wybranym dniu istnieje co najmniej jedna aktywność. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji bez zaznaczenia opcji "recurring". \end{enumerate} & Zamknięcie 
+	się okna edycji aktywności. Naniesienie poprawek do informacji zawartych w edytowanej aktywności. & - \\ \hline
+
+	Edycja aktywności R1 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W wybranym dniu stnieje co najmniej jedna aktywność, która została stworzona z opcją 
+	"recurring". & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji z zaznaczeną 
+	opcją "recurring". \end{enumerate} & Zamknięcie się okna edycji aktywności. Naniesienie poprawek do informacji zawartych w edytowanej aktywności i każdej instancji tej aktywności stworzonej 
+	przez opcję "recurring".  & - \\ \hline
+
+	Edycja aktywności R2 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W wybranym dniu istnieje co najmniej jedna aktywność, która nie została stworzona z 
+	opcją "recurring". & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji z 
+	zaznaczeną opcją "recurring". \end{enumerate} & Zamknięcie się okna edycji aktywności. Naniesienie poprawek do informacji zawartych w edytowanej aktywności i utworzenie aktywności z 
+	naniesionymi poprawkami w każdym następnym dniu o tej samej nazwie (np. w każdy pon).  & - \\ \hline
+
+	Edycja aktywności NULL & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W danym dniu nie ma zaplanowanej żadnej aktywności. & \begin{enumerate}[leftmargin 
+	=*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \end{enumerate} & Wyświetla się pusta lista możliwych do edycji aktywności, nie pozwalając użytkownikowi na kontynuację 
+	czynności. & - \\ \hline
+
+	Usuwanie aktywności & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W wybranym dniu istnieje co najmniej jedna aktywność. & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz usunięcia aktywności. \item Wybór aktywności do usunięcia bez zaznaczenia opcji "recurring". \end{enumerate} & 
+	Usunięcie wybranej aktywności z aktualnego dnia w każdym z widoków. & - \\ \hline
+
+	Usuwanie aktywności R & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W wybranym dniu stnieje co najmniej jedna aktywność. & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz 	usunięcia aktywności. \item Wybór aktywności do usunięcia z zaznaczeniem opcji "recurring". \end{enumerate} & 
+	Usunięcie wybranej aktywności z aktualnego dnia oraz każdej instancji tej aktywności w każdym następnym dniu o tej samej nazwie (np. w każdy pon) (o ile takie istnieją) w każdym z widoków. & 
+	- \\ \hline
+
+	Usuwanie aktywności NULL & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. W danym dniu nie ma zaplanowanej żadnej aktywności. &   \begin{enumerate}
+	[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \end{enumerate} & Wyświetla się pusta lista możliwych do usunięcia aktywności, nie pozwalając użytkownikowi na 
+	kontynuację czynności. & - \\ \hline
+
+	Powiadomienie o święcie W1 & Użytkownik znajduje się aktualnie w widoku miesiąca. & - & Odpowiednie kwadraty w widoku miesiąca są ''zapalone'' lub ''zgaszone'', w zależności od tego, czy 
+	poszczególnym dniom przypada jakieś święto. & - \\ \hline
+
+	Powiadomienie o święcie W2 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Przeglądany dzień nie jest uznawany za jakiekolwiek święto. & - & Kwadrat 
+	odpowiadający za powiadomienie w widoku dnia jest "zgaszony". & - \\ \hline
+
+	Powiadomienie o święcie W3 & Użytkownik znajduje się aktualnie w widoku miesiąca z aktywnym widokiem dnia. Przeglądany dzień jest uznawany za jakiekolwiek święto. & - & Kwadrat 
+	odpowiadający za powiadomienie jest "zapalony". & - \\ \hline
+
+	Zmiana widoku- dzień & Użytkownik znajduje się aktualnie w widoku miesiąca z wybranym którymś z dni. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu 
+	widoku. \item Wybór trybu dnia. \end{enumerate} & Przejście do widoku wybranego dnia. & - \\ \hline
+	
+	Zmiana widoku- tydzień & Użytkownik znajduje się aktualnie w widoku miesiąca z wybranym którymś z dni. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu 
+	widoku. \item Wybór trybu tygodnia. \end{enumerate} & Przejście do widoku tygodnia, do którego należy wybrany dzień. & - \\ \hline
+
+	Zmiana widoku- miesiąc & Użytkownik znajduje się aktualnie w widoku miesiąca z wybranym którymś z dni. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu 
+	widoku. \item Wybór trybu miesiąca. \end{enumerate} & Zamknięcie widoku wybranego dnia. & - \\ \hline
+	\end{longtable}
+
+\end{flushleft}
+\end{document}
