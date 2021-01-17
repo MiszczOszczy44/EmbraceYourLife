@@ -1,0 +1,97 @@
+\documentclass{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+	\geometry{a4paper}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+\begin{document}
+Zaplanowane testy sprawdzające funkcjonalność zawartą w oknie widoku tygodnia aplikacji. (W-wariant, R-rekurencja, NULL-brak, ,,w każdym widoku''- w widoku dnia, tygodnia i mies.)
+\setlength\LTleft{-1in}
+
+	\begin{longtable}[H]{| m{3.5cm} | m{3.5cm} | m{3.5cm} | m{3.5cm} | m{3.5cm} |} \hline
+	Nazwa & Warunki wstępne & Kroki wykonania & Oczekiwany rezultat & Otrzymany rezultat \\ \hline
+
+	Zmiany strefy czasowej w widoku dnia & Użytkownik znajduje się aktualnie w widoku dnia. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Otworzenie okna zmiany strefy czasowej. \item 
+	Wybór dowolnej ze stref czasowych. \end{enumerate} & Zmiana wyświetlanej strefy czasowej. Przesunięcie utworzonych wydarzeń zgodnie ze zmianą czasu. Jeśli zajdzie taka potrzeba, 
+	przesunięcie wydarzeń na poprzedni/następny dzień. & - \\ \hline 
+	
+	 Rozwinięcie rozpisu godzin dnia & Użytkownik znajduje się aktualnie w widoku tygodnia. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w kropkę przenoszącą do widoku danego 
+	 dnia. \end{enumerate} & Przejście do trybu widoku dnia pokazującego rozwinięty plan aktywności wybranego dnia. & - \\ \hline
+
+	Przejście do poprzedniego tygodnia W1 & Użytkownik znajduje się aktualnie w widoku tygodnia. Aktualny tydzień nie jest pierwszym tygodniem w zbiorze. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do poprzedniego tygodnia \end{enumerate} & Przejście do widoku poprzedniego tygodnia. Zmiana zakresu dni i nazwy miesiąca(jeśli konieczne) & 
+	- \\ \hline
+
+	Przejście do poprzedniego tygodnia W2 & Użytkownik znajduje się aktualnie w widoku tygodnia. Aktualny tydzień jest pierwszym tygodniem w zbiorze. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do poprzedniego tygodnia. \end{enumerate} & Pozostanie w widoku obecnego tygodnia. & - \\ \hline
+	
+	Przejście do następnego tygodnia W1 & Użytkownik znajduje się aktualnie w widoku tygodnia. Aktualny tydzień nie jest ostatnim tygodniem w zbiorze. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do tygodnia następnego. \end{enumerate} & Przejście do widoku następnego tygodnia.  Zmiana zakresu dni i nazwy miesiąca(jeśli konieczne) & 
+	- \\ \hline
+
+	Przejście do następnego tygodnia W2 & Użytkownik znajduje się aktualnie w widoku tygodnia. Aktualny tydzień jest ostatnim tygodniem w zbiorze. & \begin{enumerate}[leftmargin =*, 
+	topsep=0pt] \item Kliknięcie w strzałkę przejścia do następnego tygodnia. \end{enumerate} & Pozostanie w widoku obecnego tygodnia. & - \\ \hline
+
+	Dodanie aktywności & Użytkownik znajduje się aktualnie w widoku tygodnia. &  \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz dodawania aktywności. \item Wybranie 
+	docelowego dnia. \item Dodanie aktywności bez zaznaczonej opcji "recurring". \end{enumerate} & Zamknięcie się okna dodawania aktywności. Dodanie do planu stworzonej aktywności i 
+	umieszczenie jej przy odpowiedniej godzinie. & -  \\ \hline
+
+	Dodanie aktywności R & Użytkownik znajduje się aktualnie w widoku tygodnia. &  \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz dodawania aktywności. \item Wybranie 
+	docelowego dnia.\item Dodanie aktywności z zaznaczoną opcją "recurring". \end{enumerate} & Zamknięcie się okna dodawania aktywności. Dodanie do planu stworzonej aktywności i umieszczenie 
+	jej przy odpowiedniej godzinie, dodanie aktywności w każdym następnym dniu o tej samej nazwie (np. w każdy pon). & -  \\ \hline
+	
+	Edycja aktywności & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień z co najmniej jedną aktywnością. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item 
+	Kliknięcie w klawisz edycji aktywności. \item Wybór dnia, w którym jest co najmniej jedna aktywność. \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji bez zaznaczenia opcji 
+	"recurring". \end{enumerate} & Zamknięcie się okna edycji aktywności. Naniesienie poprawek do informacji zawartych w edytowanej aktywności. & - \\ \hline
+
+	Edycja aktywności R1 & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień z co najmniej jedną aktywnością, która została stworzona z opcją "recurring". & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór dnia, w którym jest co najmniej jedna aktywność, która została stworzona z opcją 
+	"recurring". \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji z zaznaczeną opcją "recurring". \end{enumerate} & Zamknięcie się okna edycji aktywności. Naniesienie poprawek 
+	do informacji zawartych w edytowanej aktywności i każdej instancji tej aktywności stworzoną przez opcję "recurring".  & - \\ \hline
+
+	Edycja aktywności R2 & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień z co najmniej jedną aktywnością, która nie została stworzona z opcją "recurring". & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności.  \item Wybór dnia, w którym jest co najmniej jedna aktywność, która nie została stworzona z opcją 
+	"recurring". \item Wybór aktywności do edycji. \item Dokonanie zamierzonej edycji z zaznaczeną opcją "recurring". \end{enumerate} & Zamknięcie się okna edycji aktywności. Naniesienie poprawek 
+	do informacji zawartych w edytowanej aktywności i utworzenie aktywności z naniesionymi poprawkami w każdym następnym dniu o tej samej nazwie (np. w każdy pon).  & - \\ \hline
+
+	Edycja aktywności NULL1 & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień, w którym nie ma zaplanowanej żadnej aktywności. & 
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór dnia, w którym nie ma żadnej aktywności.\end{enumerate} & Wyświetla się pusta lista 
+	możliwych do edycji aktywności, nie pozwalając użytkownikowi na kontynuację czynności. & - \\ \hline
+	
+%	Edycja aktywności NULL2 & Użytkownik znajduje się aktualnie w widoku tygodnia. Nie istnieje ani jeden dzień z co najmniej jedną zaplanowaną aktywnością. & \begin{enumerate}[leftmargin =*, 
+%	topsep=0pt] \item Kliknięcie w klawisz edycji aktywności. \item Wybór dnia. \end{enumerate} & Wyświetla się pusta lista możliwych do edycji aktywności, nie pozwalając użytkownikowi na 
+%	kontynuację czynności. & - \\ \hline
+
+	Usuwanie aktywności & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień z co najmniej jedną aktywnością. & \begin{enumerate}[leftmargin =*, topsep=0pt] 
+	\item Kliknięcie w klawisz usunięcia aktywności. \item Wybór dnia, w którym jest co najmniej jedna aktywność. \item Wybór aktywności do usunięcia bez zaznaczenia opcji "recurring". 
+	\end{enumerate} & Usunięcie wybranej aktywności z wybranego dnia. & - \\ \hline
+
+	Usuwanie aktywności R & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień z co najmniej jedną aktywnością. & \begin{enumerate}[leftmargin =*, topsep=0pt] 
+	\item Kliknięcie w klawisz usunięcia aktywności. \item Wybór dnia, w którym jest co najmniej jedna aktywność. \item Wybór aktywności do usunięcia z zaznaczeniem opcji "recurring". 
+	\end{enumerate} & Usunięcie wybranej aktywności z wybranego dnia oraz każdej instancji tej aktywności w każdym następnym dniu o tej samej nazwie (np. w każdy pon) (o ile takie istnieją). & 
+	- \\ \hline
+
+	Usuwanie aktywności NULL & Użytkownik znajduje się aktualnie w widoku tygodnia. Istnieje co najmniej jeden dzień, w którym nie ma zaplanowanej żadnej aktywności. &   
+	\begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w klawisz usunięcia aktywności. \item Wybór dnia, w którym nie ma żadnej aktywności. \end{enumerate} & Wyświetla się pusta lista 
+	możliwych do usunięcia aktywności, nie pozwalając użytkownikowi na kontynuację czynności. & - \\ \hline
+	
+	Powiadomienie o święcie W1 & Użytkownik znajduje się aktualnie w widoku tygodnia. Przeglądany tydzień nie ma w sobie dnia, który jest uznawany za jakiekolwiek święto. & - & Wszystkie kwadraty 
+	odpowiadające za powiadomienie są "zgaszony". & - \\ \hline
+
+	Powiadomienie o święcie W2 & Użytkownik znajduje się aktualnie w widoku tygodnia. Przeglądany tydzień ma w sobie co najmniej jeden dzień, który jest uznawany za jakiekolwiek święto. & - & 
+	Kwadrat odpowiadający za powiadomienie na poziomie tygodnia oraz wszystkie kwadraty z poziomu dnia podczas którego jest święto są "zapalone". & - \\ \hline
+
+	Zmiana widoku- dzień & Użytkownik znajduje się aktualnie w widoku tygodnia. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu widoku. \item Wybór trybu 
+	dnia. \end{enumerate} & Przejście do widoku aktualnego dnia. & - \\ \hline
+	
+	Zmiana widoku- tydzień & Użytkownik znajduje się aktualnie w widoku tygodnia. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu widoku. \item Wybór trybu 
+	tygodnia. \end{enumerate} & - & - \\ \hline
+	
+	Zmiana widoku- miesiąc & Użytkownik znajduje się aktualnie w widoku tygodnia. & \begin{enumerate}[leftmargin =*, topsep=0pt] \item Kliknięcie w przycisk zmiany trybu widoku. \item Wybór trybu 
+	miesiąca. \end{enumerate} & Przejście do widoku aktualnego miesiąca. & - \\ \hline
+	\end{longtable}
+\end{document}
