@@ -6,7 +6,6 @@ Until 29.I.2021 plan the next stages of the project, organize team work and assi
 Band members:
 Łukasz Bochniak - team leader
 Tomasz Świrgoń - engineer
-Patryk Krawiec - engineer
 Radosław Szymanek - tester
 Jakub Daniel Szlęzak - tester
 link to all previous band submissions: 
