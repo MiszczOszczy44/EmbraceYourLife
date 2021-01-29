@@ -14,3 +14,5 @@ link to all team tasks from the current sprint:
 https://embraceyourlife.atlassian.net/secure/RapidBoard.jspa?rapidView=1&projectKey=EYL&view=planning&selectedIssue=EYL-55&issueLimit=100
 All technical documentation of the project is available in the "doc" directory.
 Technology used in the project: Jira, GitHub, Java, SQLite, Drawio, Android
+The following link will lead you to an online excel sheet containing work planned for the next term: 
+https://docs.google.com/spreadsheets/d/1S_ztFH-4T95EDYoQJgXzlBcmdNNOl5fHMZ0lsvwRMkQ/edit?usp=sharing
