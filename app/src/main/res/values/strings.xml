@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">CreateExerciseActivity</string>
+    <string name="Button2">Gotowe</string>
+    <string name="Button1">Anuluj</string>
+    <string name="TextPanel">Nazwij ćwiczenie</string>
+    <string name="Switch1">Powtórzenia</string>
+    <string name="Switch2">Obciążenie</string>
+    <string name="Switch3">Czas trwania</string>
+    <string name="Switch4">Dystans</string>
+    <string-array name="category">
+        <item>"cat1"</item>
+        <item>"cat2"</item>
+        <item>"cat3"</item>
+    </string-array>
+
+</resources>
