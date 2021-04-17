@@ -1,20 +1,16 @@
-package com.example.createexerciseactivity;
+package project.embraceyourlife;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 
-import java.util.Locale;
-
-public class MainActivity extends AppCompatActivity {
+public class CreateExerciseActivity extends AppCompatActivity {
 
     private EditText _activity_name;
     private Switch powtorzenia;
@@ -24,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_createexercise);
 
         Spinner Category = (Spinner) findViewById(R.id.category);
-        ArrayAdapter<String> Adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.category));
+        ArrayAdapter<String> Adapter = new ArrayAdapter<String>(CreateExerciseActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Kategoria));
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Category.setAdapter(Adapter);
 

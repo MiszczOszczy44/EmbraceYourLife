@@ -1,4 +1,4 @@
-package com.example.createexerciseactivity;
+package project.embraceyourlife;
 
 import org.junit.Test;
 

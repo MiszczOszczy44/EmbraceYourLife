@@ -12,7 +12,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
-        android:text="@string/Button1"
+        android:text="@string/Anuluj"
         app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/TextPanel"
+            android:text="@string/Nazwij_cwiczenie"
             android:onClick="clear"/>
 
         <Spinner
@@ -60,7 +60,7 @@
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Switch1" />
+            android:text="@string/Powtorzenia" />
 
         <TextView
             android:id="@+id/textView"
@@ -71,7 +71,7 @@
             android:id="@+id/switch2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Switch2" />
+            android:text="@string/Obciazenie" />
 
         <TextView
             android:id="@+id/textView2"
@@ -82,7 +82,7 @@
             android:id="@+id/switch3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Switch3" />
+            android:text="@string/Czas_trwania" />
 
         <TextView
             android:id="@+id/textView3"
@@ -93,7 +93,7 @@
             android:id="@+id/switch4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Switch4" />
+            android:text="@string/Dystans" />
     </LinearLayout>
 
     <Button
@@ -102,7 +102,7 @@
         android:layout_height="57dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/Button2"
+        android:text="@string/Gotowe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
