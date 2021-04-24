@@ -21,4 +21,34 @@
         <item>"kategoria 2"</item>
         <item>"kategoria 3"</item>
     </string-array>
+
+    <string name="Akcje">Akcje</string>
+    <string name="Kalendarz">Kalendarz</string>
+    <string name="Wolne_terminy">Wolne terminy</string>
+    <string name="Silownia">Siłownia</string>
+    <string name="Dodaj_wydarzenie">Dodaj wydarzenie</string>
+
+    <string name="Dodaj_trening">Dodaj trening</string>
+    <string name="Statystyki">Statystyki</string>
+    <string name="Plan_tygodnia">Plan tygodnia</string>
+
+    <string-array name="Powtarzalnosc">
+        <item>Jednorazowe</item>
+        <item>Powtarzające się</item>
+    </string-array>
+    <string name="Cwiczenie">Ćwiczenie</string>
+    <string name="Atrybut">Atrybut:</string>
+    <string name="Czas">Czas</string>
+    <string name="HH_MM">HH:MM</string>
+    <string name="Data">Data</string>
+    <string name="DD_MM_YYYY">DD/M(M)/YYYY</string>
+
+    <string name="kategoria">Kategoria</string>
+    <string name="Miejsce">Miejsce</string>
+    <string name="Nazwa">Nazwa</string>
+    <string name="Nazwa_treningu">Nazwa treningu</string>
+    <string name="Plan_treningu">Plan treningu</string>
+    <string name="Powtarzalnosc">Powtarzalność</string>
+    <string name="Dodaj_cwiczenie">Dodaj ćwiczenie</string>
+    <string name="pusty_string"/>
 </resources>

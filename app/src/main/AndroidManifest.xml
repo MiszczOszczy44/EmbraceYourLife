@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EmbraceYourLife">
+        <activity android:name=".GymStatsActivity"></activity>
         <activity android:name=".CreateExerciseActivity"></activity>
-        <activity android:name=".SilowniaActivity">
+        <activity android:name=".DaySchedule"></activity>
+        <activity android:name=".GymActivity"></activity>
+        <activity android:name=".TworzenieTreningu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
