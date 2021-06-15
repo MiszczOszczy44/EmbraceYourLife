@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Database {
     DBHelperClass DBHelper;
@@ -14,47 +19,32 @@ public class Database {
         DBHelper = new DBHelperClass(context);
     }
 
-    public long insertIntoCwiczenie_info(String Nazwa_cwiczenia, String opis_cwiczenia, String Nazwa_kategorii)
-    {
-        SQLiteDatabase dbb = DBHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("Nazwa_cwiczenia", Nazwa_cwiczenia);
-        contentValues.put("Opis_cwiczenia", opis_cwiczenia);
-        contentValues.put("Nazwa_kategorii", Nazwa_kategorii);
-        long id = dbb.insert("Cwiczenie_info", null , contentValues);
-        return id;
+    public class Cwiczenie{
+        int ID;
+        String Nazwa;
+        String Kategoria;
+        byte[] Ilosc_powtorzen;
+        byte[] Obciazenie;
+        byte[] Czas_trwania;
+        byte[] Dystans;
     }
-    public long insertIntoDzien(String Data_dnia, int numer_tygodnia, int miesiac, int rok)
-    {
-        SQLiteDatabase dbb = DBHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("Data_dnia", Data_dnia);
-        contentValues.put("Numer_tygodnia", numer_tygodnia);
-        contentValues.put("Miesiac", miesiac);
-        contentValues.put("Rok", rok);
-        long id = dbb.insert("Dzien", null , contentValues);
-        return id;
+    public class Wydarzenie{
+        int ID;
+        String Nazwa;
+        String Powtarzalnosc;
+        String Czas_trwania;
+        String Data;
+        String Opis;
+        String Lista_cwiczen;
     }
-    public long insertIntoWydarzenie(String Data_dnia, String Nazwa_wydarzenia, String Opis_wydarzenia, String Godzina_rozpoczecia, int Czas_trwania, boolean CzyCwiczenie)
+
+    public long insertIntoCwiczenie(int ID, String Nazwa, String Kategoria, boolean Ilosc_powtorzen, boolean Obciazenie, boolean Czas_trwania, boolean Dystans)
     {
         SQLiteDatabase dbb = DBHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Data_dnia", Data_dnia);
-        contentValues.put("Nazwa_wydarzenia", Nazwa_wydarzenia);
-        contentValues.put("Opis_wydarzenia", Opis_wydarzenia);
-        contentValues.put("Godzina_rozpoczecia", Godzina_rozpoczecia);
-        contentValues.put("Czas_trwana", Czas_trwania);
-        contentValues.put("CzyCwiczenie", CzyCwiczenie);
-        long id = dbb.insert("Wydarzenie", null , contentValues);
-        return id;
-    }
-    public long insertIntoCwiczenie(int ID_Wydarzenia, String Nazwa_cwiczenia, int Index_kolejnosci, int Ilosc_powtorzen, float Obciazenie, int Czas_trwania, float Dystans)
-    {
-        SQLiteDatabase dbb = DBHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("ID_Wydarzenia", ID_Wydarzenia);
-        contentValues.put("Nazwa_cwiczenia", Nazwa_cwiczenia);
-        contentValues.put("Index_kolejnosci", Index_kolejnosci);
+        contentValues.put("ID_Cwiczenia", ID);
+        contentValues.put("Nazwa_wydarzenia", Nazwa);
+        contentValues.put("Kategoria", Kategoria);
         contentValues.put("Ilosc_powtorzen", Ilosc_powtorzen);
         contentValues.put("Obciazenie", Obciazenie);
         contentValues.put("Czas_trwania", Czas_trwania);
@@ -62,77 +52,110 @@ public class Database {
         long id = dbb.insert("Cwiczenie", null , contentValues);
         return id;
     }
-
-    public String getData(String Table_name, String selection, String selectionArgs[], String groupBy, String having, String orderBy)
+    public long insertIntoWydarzenie(int ID, String Nazwa, String Powtarzalnosc, String Czas_trwania, String Data, String Opis, String Lista_cwiczen)
     {
-        SQLiteDatabase db = DBHelper.getWritableDatabase();
-        String[] columns = {"ID_Wydarzenia", "Nazwa_cwiczenia", "Index_kolejnosci", "Ilosc_powtorzen", "Obciazenie", "Czas_trwania", "Dystans"};
-        Cursor cursor =db.query(Table_name,columns,selection,selectionArgs,groupBy,having,orderBy);
-        StringBuffer buffer= new StringBuffer();
-        while (cursor.moveToNext())
-        {
-            int cid =cursor.getInt(cursor.getColumnIndex(DBHelperClass.UID));
-            String name =cursor.getString(cursor.getColumnIndex(DBHelperClass.NAME));
-            String  password =cursor.getString(cursor.getColumnIndex(DBHelperClass.MyPASSWORD));
-            buffer.append(cid+ "   " + name + "   " + password +" \n");
-        }
-        return buffer.toString();
+        SQLiteDatabase dbb = DBHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", ID);
+        contentValues.put("Nazwa", Nazwa);
+        contentValues.put("Powtarzalnosc", Powtarzalnosc);
+        contentValues.put("Czas_trwania", Czas_trwania);
+        contentValues.put("Data", Data);
+        contentValues.put("Opis", Opis);
+        contentValues.put("Lista_cwiczen", Lista_cwiczen);
+        long id = dbb.insert("Wydarzenie", null , contentValues);
+        return id;
     }
 
-    public  int delete(String uname)
+    public List<Wydarzenie> getWydarzenia(String Data)
     {
         SQLiteDatabase db = DBHelper.getWritableDatabase();
-        String[] whereArgs ={uname};
+        String[] columns = {"ID", "Nazwa", "Powtarzalnosc", "Czas_trwania", "Data", "Opis", "Lista_cwiczen"};
+        Cursor cursor =db.query("Wydarzenie",columns,null,null,null,null,"Data");
+        StringBuffer buffer= new StringBuffer();
+        List<Wydarzenie> templist = null;
+        while (cursor.moveToNext())
+        {
+            Wydarzenie temp = new Wydarzenie();
+            temp.ID =cursor.getInt(cursor.getColumnIndex("ID"));
+            temp.Nazwa =cursor.getString(cursor.getColumnIndex("Nazwa"));
+            temp.Powtarzalnosc =cursor.getString(cursor.getColumnIndex("Powtarzalnosc"));
+            temp.Czas_trwania =cursor.getString(cursor.getColumnIndex("Czas_trwania"));
+            temp.Data =cursor.getString(cursor.getColumnIndex("Data"));
+            temp.Opis =cursor.getString(cursor.getColumnIndex("Opis"));
+            temp.Lista_cwiczen =cursor.getString(cursor.getColumnIndex("Lista_cwiczen"));
+            templist.add(temp);
+        }
+        return templist;
+    }
+    public List<Cwiczenie> getCwiczenie(String Data)
+    {
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String[] columns = {"ID_Cwiczenia", "Nazwa_cwiczenia", "Kategoria", "Ilosc_powtorzen", "Obciazenie", "Czas_trwania", "Dystans"};
+        Cursor cursor =db.query("Cwiczenie",columns,null,null,null,null,"Data");
+        StringBuffer buffer= new StringBuffer();
+        List<Cwiczenie> templist = null;
+        while (cursor.moveToNext())
+        {
+            Cwiczenie temp = new Cwiczenie();
+            temp.ID =cursor.getInt(cursor.getColumnIndex("ID_Cwiczenia"));
+            temp.Nazwa =cursor.getString(cursor.getColumnIndex("Nazwa_cwiczenia"));
+            temp.Kategoria =cursor.getString(cursor.getColumnIndex("Kategoria"));
+            temp.Ilosc_powtorzen =cursor.getBlob(cursor.getColumnIndex("Ilosc_powtorzen"));
+            temp.Obciazenie =cursor.getBlob(cursor.getColumnIndex("Obciazenie"));
+            temp.Czas_trwania =cursor.getBlob(cursor.getColumnIndex("Czas_trwania"));
+            temp.Dystans =cursor.getBlob(cursor.getColumnIndex("Dystans"));
+            templist.add(temp);
+        }
+        return templist;
+    }
 
-        int count =db.delete(DBHelperClass.TABLE_NAME ,DBHelperClass.NAME+" = ?",whereArgs);
+
+
+
+
+
+
+
+    public  int deleteFromCwiczenie(String ID)
+    {
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String[] whereArgs ={ID};
+
+        int count =db.delete("Cwiczenie" ,"ID_Cwiczenia"+" = ?",whereArgs);
+        return  count;
+    }
+    public  int deleteFromWydarzenie(String ID)
+    {
+        SQLiteDatabase db = DBHelper.getWritableDatabase();
+        String[] whereArgs ={ID};
+
+        int count =db.delete("Wydarzenie" ,"ID"+" = ?",whereArgs);
         return  count;
     }
 
-    public int updateName(String oldName , String newName)
-    {
-        SQLiteDatabase db = DBHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DBHelperClass.NAME,newName);
-        String[] whereArgs= {oldName};
-        int count =db.update(DBHelperClass.TABLE_NAME,contentValues, DBHelperClass.NAME+" = ?",whereArgs );
-        return count;
-    }
 
     static class DBHelperClass extends SQLiteOpenHelper
     {
         private static final String DATABASE_NAME = "DATABASE";    // Database Name
         private static final int DATABASE_Version = 1;    // Database Version
-
-        private static final String CREATE_TABLE_Cwiczenie_info = "CREATE TABLE Cwiczenie_info (\"" +
-                "Nazwa_cwiczenia TEXT PRIMARY KEY AUTO INCREMENT," +
-                "Opis_cwiczenia TEXT, " +
-                "Nazwa_kategorii TEXT\");";
-
         private static final String CREATE_TABLE_Cwiczenie = "CREATE TABLE Cwiczenie (\"" +
-                "ID_Wydarzenia INTEGER ," +
+                "ID_Cwiczenia INTEGER PRIMARY KEY AUTO INCREMENT," +
                 "Nazwa_cwiczenia TEXT, " +
-                "Index_kolejnosci INTEGER," +
-                "Ilosc_powtorzen INTEGER," +
-                "Obciazenie REAL," +
-                "Czas_trwania INTEGER," +
-                "Dystans REAL," +
-                "FOREIGN KEY(ID_Wydarzenia) REFERENCES Wydarzenie(ID_Wydarzenia)," +
-                "FOREIGN KEY(Nazwa_cwiczenia) REFERENCES Cwiczenie_info(Nazwa_cwiczenia)\");";
+                "Kategoria TEXT," +
+                "Ilosc_powtorzen BLOB," +
+                "Obciazenie BLOB," +
+                "Czas_trwania BLOB," +
+                "Dystans BLOB\");";
 
-        private static final String CREATE_TABLE_Wydarzenie = "CREATE TABLE Wydarzenie (\"ID_Wydarzenia INTEGER PRIMARY KEY AUTO INCREMENT," +
-                "Data_dnia TEXT," +
-                "Nazwa_wydarzenia TEXT," +
-                "Opis_wydarzenia TEXT," +
-                "Godzina_rozpoczecia TEXT," +
-                "Czas_trwania INTEGER," +
-                "Czy_cwiczenie BLOB," +
-                "FOREIGN KEY(Data_dnia) REFERENCES Dzien(Data_dnia)\");";
-
-        private static final String CREATE_TABLE_Dzien = "CREATE TABLE Dzien (\"" +
-                "Data_dnia TEXT PRIMARY KEY, " +
-                "Numer_tygodnia INTEGER," +
-                "Miesiac INTEGER, " +
-                "Rok INTEGER)\");";
+        private static final String CREATE_TABLE_Wydarzenie = "CREATE TABLE Wydarzenie (\"" +
+                "ID INTEGER PRIMARY KEY AUTO INCREMENT," +
+                "Nazwa TEXT," +
+                "Powtarzalnosc TEXT," +
+                "Czas_trwania TEXT," +
+                "Data TEXT," +
+                "Opis TEXT," +
+                "Lista_cwiczen TEXT\");";
         private Context context;
 
         public DBHelperClass(Context context) {
@@ -143,26 +166,19 @@ public class Database {
         public void onCreate(SQLiteDatabase db) {
 
             try {
-                db.execSQL(CREATE_TABLE_Cwiczenie_info);
-                db.execSQL(CREATE_TABLE_Dzien);
                 db.execSQL(CREATE_TABLE_Wydarzenie);
                 db.execSQL(CREATE_TABLE_Cwiczenie);
             } catch (Exception e) {
-                Message.message(context,""+e);
             }
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try {
-                Message.message(context,"OnUpgrade");
                 db.execSQL("DROP TABLE Cwiczenie");
                 db.execSQL("DROP TABLE Wydarzenie");
-                db.execSQL("DROP TABLE Dzien");
-                db.execSQL("DROP TABLE Cwiczenie_info");
                 onCreate(db);
             }catch (Exception e) {
-                Message.message(context,""+e);
             }
         }
     }
