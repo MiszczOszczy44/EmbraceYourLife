@@ -9,6 +9,7 @@ import android.provider.ContactsContract;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -89,13 +90,13 @@ public class Database {
         }
         return templist;
     }
-    public List<Cwiczenie> getCwiczenie(String Data)
+    public List<Cwiczenie> getCwiczenie()
     {
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String[] columns = {"ID_Cwiczenia", "Nazwa_cwiczenia", "Kategoria", "Ilosc_powtorzen", "Obciazenie", "Czas_trwania", "Dystans"};
         Cursor cursor =db.query("Cwiczenie",columns,null,null,null,null,"Data");
         StringBuffer buffer= new StringBuffer();
-        List<Cwiczenie> templist = null;
+        List<Cwiczenie> templist = new ArrayList<Cwiczenie>();
         while (cursor.moveToNext())
         {
             Cwiczenie temp = new Cwiczenie();
