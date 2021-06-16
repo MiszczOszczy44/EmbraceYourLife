@@ -21,19 +21,6 @@ public class Database {
     }
 
     private static Database _instance;
-    private Database()
-    {
-
-    }
-
-    public static Database getInstance()
-    {
-        if (_instance == null)
-        {
-            _instance = new Database();
-        }
-        return _instance;
-    }
 
     public class Cwiczenie{
         int ID;
