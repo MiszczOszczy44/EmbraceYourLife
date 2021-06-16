@@ -12,7 +12,7 @@ import java.util.List;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class TestDatabase {
-    Database baza = new Database();
+    Database baza;
 
     @Test
     void InsertCwiczenieTest()
