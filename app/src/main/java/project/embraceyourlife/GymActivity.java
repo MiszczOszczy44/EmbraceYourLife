@@ -2,7 +2,9 @@ package project.embraceyourlife;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,21 +22,26 @@ public class GymActivity extends AppCompatActivity {
         plan_tygodnia = findViewById(R.id.stat);
         dodaj_trening = findViewById(R.id.dodaj_trening);
 
-        statystyki.setOnClickListener(v -> {statystykiListener();});
-        plan_tygodnia.setOnClickListener(v -> {plan_tygodniaListener();});
-        dodaj_trening.setOnClickListener(v -> {dodaj_treningListener();});
     }
 
-    public void statystykiListener(){
-
+    public void statystykiListener(View v){
+        Intent i = new Intent(this, GymStatsActivity.class);
+        startActivity(i);
     }
 
-    public void plan_tygodniaListener(){
-
+    public void plan_dniaListener(View v){
+        Intent i = new Intent(this, DaySchedule.class);
+        startActivity(i);
     }
 
-    public void dodaj_treningListener(){
+    public void dodaj_treningListener(View v){
+        Intent i = new Intent(this, TworzenieTreningu.class);
+        startActivity(i);
+    }
 
+    public void dodaj_cwiczenieListener(View v){
+        Intent i = new Intent(this, CreateExerciseActivity.class);
+        startActivity(i);
     }
 
     public void setData_wybranego_dnia_gym(String data){

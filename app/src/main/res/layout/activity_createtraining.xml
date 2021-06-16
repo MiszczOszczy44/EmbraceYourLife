@@ -12,6 +12,21 @@
     tools:context=".TworzenieTreningu">
 
 
+    <ScrollView
+        android:id="@+id/ListaCwiczenWTreninguScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/GotoweTrening"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/PlanTreninguText">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <TextView
         android:id="@+id/textNazwa"
         android:layout_width="0dp"
@@ -131,37 +146,14 @@
         app:layout_constraintStart_toStartOf="@id/editData"
         app:layout_constraintTop_toBottomOf="@id/textData" />
 
-    <EditText
-        android:id="@+id/editMiejsce"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:hint="@string/pusty_string"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/textMiejsce"
-        app:layout_constraintStart_toStartOf="@+id/textMiejsce"
-        app:layout_constraintTop_toBottomOf="@+id/textMiejsce" />
-
     <TextView
-        android:id="@+id/textMiejsce"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/Miejsce"
-        app:layout_constraintEnd_toEndOf="@+id/editData"
-        app:layout_constraintStart_toStartOf="@+id/editCzas"
-        app:layout_constraintTop_toBottomOf="@+id/editData" />
-
-    <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/PlanTreninguText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/Plan_treningu"
-        app:layout_constraintStart_toStartOf="@+id/editMiejsce"
-        app:layout_constraintTop_toBottomOf="@+id/editMiejsce" />
+        app:layout_constraintEnd_toEndOf="@+id/editCzas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCzas" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
@@ -172,18 +164,20 @@
         android:clickable="true"
         android:contentDescription="@string/Dodaj_cwiczenie"
         android:onClick="dodajCwiczenie"
-        app:layout_constraintBottom_toTopOf="@+id/accept"
+        app:layout_constraintBottom_toTopOf="@+id/GotoweTrening"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
     <Button
-        android:id="@+id/accept"
+        android:id="@+id/GotoweTrening"
         android:layout_width="397dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="wrocDoGym"
         android:text="@string/Gotowe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
@@ -395,6 +389,7 @@
             android:id="@+id/CwiczeniaWTreninguScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -423,8 +418,18 @@
                     android:layout_height="wrap_content"
                     android:onClick="dodajSpecyfikacjeCwiczenia"
                     android:text="@string/Cwiczenie" />
+
             </LinearLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/DodajCwiczenie"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/Dodaj_cwiczenie"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/CwiczeniaWTreninguScrollView"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

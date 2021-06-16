@@ -2,7 +2,9 @@ package project.embraceyourlife;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,5 +42,10 @@ public class GymStatsActivity extends AppCompatActivity {
     public void statystykiOgolneListener()
     {
 
+    }
+
+    public void powrotDoSilowniListener(View v){
+        Intent i = new Intent(this, GymActivity.class);
+        startActivity(i);
     }
 }

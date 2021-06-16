@@ -3,6 +3,7 @@ package project.embraceyourlife;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -24,9 +25,9 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.akcje:
+            /*case R.id.akcje:
                 akcjeButton();
-                return true;
+                return true;*/
             case R.id.kalendarz:
                 kalendarzButton();
                 return true;
@@ -53,10 +54,11 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
 
     }
     public void silowniaButton(){
-
+        Intent i;
+        i = new Intent(this, GymActivity.class);
+        startActivity(i);
     }
     public void dodaj_wydarzenieButton(){
-
     }
 
     public void setData_wybranego_dnia(String data){

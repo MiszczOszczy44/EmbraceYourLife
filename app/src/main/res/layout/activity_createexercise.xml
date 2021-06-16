@@ -4,18 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/Anuluj"
-        android:layout_width="153dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/Anuluj"
-        app:layout_constraintHorizontal_bias="0.035"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    tools:context=".CreateExerciseActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -35,8 +24,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/Nazwij_cwiczenie"
-            android:onClick="clear"/>
+            android:onClick="clear"
+            android:text="@string/Nazwij_cwiczenie" />
 
         <Spinner
             android:id="@+id/category"
@@ -60,6 +49,7 @@
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="zmienPowtorzenia"
             android:text="@string/Powtorzenia" />
 
         <TextView
@@ -71,6 +61,7 @@
             android:id="@+id/switch2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="zmienObciazenia"
             android:text="@string/Obciazenie" />
 
         <TextView
@@ -82,6 +73,7 @@
             android:id="@+id/switch3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="zmienCzasTrwania"
             android:text="@string/Czas_trwania" />
 
         <TextView
@@ -93,17 +85,31 @@
             android:id="@+id/switch4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="zmienDystans"
             android:text="@string/Dystans" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/Anuluj"
+        android:layout_width="153dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="anulujButtonListener"
+        android:text="Anuluj"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Gotowe"
         android:layout_width="153dp"
         android:layout_height="57dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/Gotowe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="gotoweButtonListener"
+        android:text="Gotowe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
