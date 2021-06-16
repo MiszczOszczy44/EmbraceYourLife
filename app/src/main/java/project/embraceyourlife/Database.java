@@ -27,10 +27,10 @@ public class Database {
         int ID;
         String Nazwa;
         String Kategoria;
-        byte[] Ilosc_powtorzen;
-        byte[] Obciazenie;
-        byte[] Czas_trwania;
-        byte[] Dystans;
+        int Ilosc_powtorzen;
+        int Obciazenie;
+        int Czas_trwania;
+        int Dystans;
     }
     public class Wydarzenie{
         int ID;
@@ -46,7 +46,7 @@ public class Database {
     {
         SQLiteDatabase dbb = DBHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Nazwa_wydarzenia", Nazwa);
+        contentValues.put("Nazwa_cwiczenia", Nazwa);
         contentValues.put("Kategoria", Kategoria);
         contentValues.put("Ilosc_powtorzen", Ilosc_powtorzen);
         contentValues.put("Obciazenie", Obciazenie);
@@ -94,7 +94,7 @@ public class Database {
     {
         SQLiteDatabase db = DBHelper.getWritableDatabase();
         String[] columns = {"ID_Cwiczenia", "Nazwa_cwiczenia", "Kategoria", "Ilosc_powtorzen", "Obciazenie", "Czas_trwania", "Dystans"};
-        Cursor cursor =db.query("Cwiczenie",columns,null,null,null,null,"Data");
+        Cursor cursor =db.query("Cwiczenie",columns,null,null,null,null, null);
         StringBuffer buffer= new StringBuffer();
         List<Cwiczenie> templist = new ArrayList<Cwiczenie>();
         while (cursor.moveToNext())
@@ -103,10 +103,10 @@ public class Database {
             temp.ID =cursor.getInt(cursor.getColumnIndex("ID_Cwiczenia"));
             temp.Nazwa =cursor.getString(cursor.getColumnIndex("Nazwa_cwiczenia"));
             temp.Kategoria =cursor.getString(cursor.getColumnIndex("Kategoria"));
-            temp.Ilosc_powtorzen =cursor.getBlob(cursor.getColumnIndex("Ilosc_powtorzen"));
-            temp.Obciazenie =cursor.getBlob(cursor.getColumnIndex("Obciazenie"));
-            temp.Czas_trwania =cursor.getBlob(cursor.getColumnIndex("Czas_trwania"));
-            temp.Dystans =cursor.getBlob(cursor.getColumnIndex("Dystans"));
+            temp.Ilosc_powtorzen =cursor.getInt(cursor.getColumnIndex("Ilosc_powtorzen"));
+            temp.Obciazenie =cursor.getInt(cursor.getColumnIndex("Obciazenie"));
+            temp.Czas_trwania =cursor.getInt(cursor.getColumnIndex("Czas_trwania"));
+            temp.Dystans =cursor.getInt(cursor.getColumnIndex("Dystans"));
             templist.add(temp);
         }
         return templist;
@@ -140,24 +140,24 @@ public class Database {
     static class DBHelperClass extends SQLiteOpenHelper
     {
         private static final String DATABASE_NAME = "DATABASE";    // Database Name
-        private static final int DATABASE_Version = 1;    // Database Version
-        private static final String CREATE_TABLE_Cwiczenie = "CREATE TABLE Cwiczenie (\"" +
-                "ID_Cwiczenia INTEGER PRIMARY KEY AUTO INCREMENT," +
-                "Nazwa_cwiczenia TEXT, " +
-                "Kategoria TEXT," +
-                "Ilosc_powtorzen BLOB," +
-                "Obciazenie BLOB," +
-                "Czas_trwania BLOB," +
-                "Dystans BLOB\");";
+        private static final int DATABASE_Version = 3;    // Database Version
+        private static final String CREATE_TABLE_Cwiczenie = "CREATE TABLE" + " Cwiczenie " + " (" +
+                "ID_Cwiczenia " + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "Nazwa_cwiczenia " + " TEXT, " +
+                "Kategoria " + " TEXT, " +
+                "Ilosc_powtorzen " + " BLOB, " +
+                "Obciazenie " + " BLOB, " +
+                "Czas_trwania " + " BLOB, " +
+                "Dystans " + " BLOB);";
 
-        private static final String CREATE_TABLE_Wydarzenie = "CREATE TABLE Wydarzenie (\"" +
-                "ID INTEGER PRIMARY KEY AUTO INCREMENT," +
-                "Nazwa TEXT," +
-                "Powtarzalnosc TEXT," +
-                "Czas_trwania TEXT," +
-                "Data TEXT," +
-                "Opis TEXT," +
-                "Lista_cwiczen TEXT\");";
+        private static final String CREATE_TABLE_Wydarzenie = "CREATE TABLE " + " Wydarzenie" + " (" +
+                "ID " + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Nazwa " + " TEXT," +
+                "Powtarzalnosc " + " TEXT," +
+                "Czas_trwania " + " TEXT," +
+                "Data " + " TEXT," +
+                "Opis " + " TEXT," +
+                "Lista_cwiczen " + " TEXT);";
         private Context context;
 
         public DBHelperClass(Context context) {
