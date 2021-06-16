@@ -54,11 +54,10 @@ public class Database {
         String Lista_cwiczen;
     }
 
-    public long insertIntoCwiczenie(int ID, String Nazwa, String Kategoria, boolean Ilosc_powtorzen, boolean Obciazenie, boolean Czas_trwania, boolean Dystans)
+    public long insertIntoCwiczenie(String Nazwa, String Kategoria, boolean Ilosc_powtorzen, boolean Obciazenie, boolean Czas_trwania, boolean Dystans)
     {
         SQLiteDatabase dbb = DBHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ID_Cwiczenia", ID);
         contentValues.put("Nazwa_wydarzenia", Nazwa);
         contentValues.put("Kategoria", Kategoria);
         contentValues.put("Ilosc_powtorzen", Ilosc_powtorzen);
@@ -68,11 +67,10 @@ public class Database {
         long id = dbb.insert("Cwiczenie", null , contentValues);
         return id;
     }
-    public long insertIntoWydarzenie(int ID, String Nazwa, String Powtarzalnosc, String Czas_trwania, String Data, String Opis, String Lista_cwiczen)
+    public long insertIntoWydarzenie(String Nazwa, String Powtarzalnosc, String Czas_trwania, String Data, String Opis, String Lista_cwiczen)
     {
         SQLiteDatabase dbb = DBHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ID", ID);
         contentValues.put("Nazwa", Nazwa);
         contentValues.put("Powtarzalnosc", Powtarzalnosc);
         contentValues.put("Czas_trwania", Czas_trwania);
