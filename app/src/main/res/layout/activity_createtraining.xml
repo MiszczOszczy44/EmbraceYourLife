@@ -12,14 +12,30 @@
     tools:context=".TworzenieTreningu">
 
 
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autofillHints="@string/pusty_string"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/Domyslny_opis_wydarzenia"
+        android:inputType="textMultiLine"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/GotoweTrening"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/PlanTreningu_OpisWydarzeniaText" />
+
     <ScrollView
         android:id="@+id/ListaCwiczenWTreninguScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/GotoweTrening"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/PlanTreninguText">
+        app:layout_constraintTop_toBottomOf="@id/PlanTreningu_OpisWydarzeniaText">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +163,7 @@
         app:layout_constraintTop_toBottomOf="@id/textData" />
 
     <TextView
-        android:id="@+id/PlanTreninguText"
+        android:id="@+id/PlanTreningu_OpisWydarzeniaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Plan_treningu"
@@ -399,37 +415,8 @@
                 android:id="@+id/CwiczeniaWTreninguScrollViewLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/CwiczenieWTreningu1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="dodajSpecyfikacjeCwiczenia"
-                    android:text="@string/Cwiczenie" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/CwiczenieWTreningu2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="dodajSpecyfikacjeCwiczenia"
-                    android:text="@string/Cwiczenie" />
-
-            </LinearLayout>
+                android:orientation="vertical" />
         </ScrollView>
-
-        <Button
-            android:id="@+id/DodajCwiczenie"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/Dodaj_cwiczenie"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/CwiczeniaWTreninguScrollView"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

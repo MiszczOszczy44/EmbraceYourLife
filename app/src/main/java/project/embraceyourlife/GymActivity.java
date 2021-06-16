@@ -36,6 +36,7 @@ public class GymActivity extends AppCompatActivity {
 
     public void dodaj_treningListener(View v){
         Intent i = new Intent(this, TworzenieTreningu.class);
+        i.putExtra("czy_wydarzenie", false);
         startActivity(i);
     }
 

@@ -17,7 +17,6 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dayschedule);
-
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);
     }
@@ -54,11 +53,14 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
 
     }
     public void silowniaButton(){
-        Intent i;
-        i = new Intent(this, GymActivity.class);
+        Intent i = new Intent(this, GymActivity.class);
         startActivity(i);
     }
     public void dodaj_wydarzenieButton(){
+        Intent i = new Intent(this, TworzenieTreningu.class);
+        // zapewnia, ze bedzie wydarzenie zamiast treningu
+        i.putExtra("czy_wydarzenie", true);
+        startActivity(i);
     }
 
     public void setData_wybranego_dnia(String data){

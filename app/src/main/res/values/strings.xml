@@ -51,4 +51,5 @@
     <string name="Powtarzalnosc">Powtarzalność</string>
     <string name="Dodaj_cwiczenie">Dodaj ćwiczenie</string>
     <string name="pusty_string"/>
+    <string name="Domyslny_opis_wydarzenia">Domyślny opis wydarzenia</string>
 </resources>
