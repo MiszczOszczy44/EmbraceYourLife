@@ -1,10 +1,11 @@
-package com.example.sqliteoperations;
+package project.embraceyourlife;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,21 @@ public class Database {
     public Database(Context context)
     {
         DBHelper = new DBHelperClass(context);
+    }
+
+    private static Database _instance;
+    private Database()
+    {
+
+    }
+
+    public static Database getInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = new Database();
+        }
+        return _instance;
     }
 
     public class Cwiczenie{
