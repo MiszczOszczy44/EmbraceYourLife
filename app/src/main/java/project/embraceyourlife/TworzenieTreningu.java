@@ -61,6 +61,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
                 cwiczenieTekst.setText(cwiczenie.Nazwa);
                 cwiczenieTekst.setId(cwiczenie.ID);
                 cwiczenieTekst.setClickable(true);
+                cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
 
                 cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -120,6 +121,9 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
     public void dodajCwiczenie(View v){
         View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
         int widocznosc_cwiczen = widok_cwiczen.getVisibility();
+        View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
+
+        if(widok_dodawania_cwiczen.getVisibility() == View.VISIBLE) return;
         if(widocznosc_cwiczen == View.VISIBLE){
             widok_cwiczen.setVisibility(View.INVISIBLE);
         }
@@ -132,17 +136,24 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
     }
 
-    public void dodajSpecyfikacjeCwiczenia(View v){
-        View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
-        View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
-        widok_dodawania_cwiczen.setVisibility(View.VISIBLE);
-        widok_cwiczen.setVisibility(View.INVISIBLE);
+    public View.OnClickListener dodajSpecyfikacjeCwiczenia = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
+            View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
 
-    }
+            widok_dodawania_cwiczen.setVisibility(View.VISIBLE);
+            widok_cwiczen.setVisibility(View.INVISIBLE);
+
+            String nazwa_cwiczenia = ((TextView)v).getText().toString();
+            ((TextView)findViewById(R.id.NoweCwiczenieWTreninguNazwa)).setText(nazwa_cwiczenia);
+        }
+    };
 
     public void schowajOkno(View v){
         View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
         View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
+        Toast.makeText(this, "Dzialam!", Toast.LENGTH_SHORT).show();
         if(widok_dodawania_cwiczen.getVisibility() == View.VISIBLE){
             widok_dodawania_cwiczen.setVisibility(View.INVISIBLE);
             widok_cwiczen.setVisibility(View.VISIBLE);
@@ -162,7 +173,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         String powtarzalnosc = ((Spinner)findViewById(R.id.spinnerPowtarzalnosc)).getSelectedItem().toString();
         String czas = ((EditText)findViewById(R.id.editCzas)).getText().toString();
         String data = ((EditText)findViewById(R.id.editData)).getText().toString();
-        //opis jest w ifie
+        //opis wydarzenia lub lista cwiczen jest w ifie
 
         if(this.czy_wydarzenie){
             i = new Intent(this, DaySchedule.class);

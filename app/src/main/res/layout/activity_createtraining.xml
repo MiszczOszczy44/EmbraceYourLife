@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/OknoRodzica"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:clickable="true"
-    android:focusable="true"
+    android:layout_height="match_parent"
+    android:clickable="false"
     android:onClick="schowajOkno"
     android:windowSoftInputMode="stateHidden"
-    tools:context=".TworzenieTreningu" >
+    tools:context=".TworzenieTreningu">
 
 
     <EditText
@@ -236,7 +235,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@string/Atrybut"
+                android:text="@string/Powtorzenia"
                 android:textSize="30sp" />
 
             <EditText
@@ -268,7 +267,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@string/Atrybut"
+                android:text="@string/Obciazenie"
                 android:textSize="30sp" />
 
             <EditText
@@ -300,7 +299,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@string/Atrybut"
+                android:text="@string/Czas"
                 android:textSize="30sp" />
 
             <EditText
@@ -332,7 +331,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@string/Atrybut"
+                android:text="@string/Dystans"
                 android:textSize="30sp" />
 
             <EditText
