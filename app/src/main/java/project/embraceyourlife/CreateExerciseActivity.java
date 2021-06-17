@@ -27,21 +27,21 @@ public class CreateExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createexercise);
 
-        this._activity_category = (Spinner) findViewById(R.id.category);
-        ArrayAdapter<String> Adapter = new ArrayAdapter<String>(CreateExerciseActivity.this,
+        this._activity_category = findViewById(R.id.category);
+        ArrayAdapter<String> Adapter = new ArrayAdapter<>(CreateExerciseActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Kategoria));
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this._activity_category.setAdapter(Adapter);
     }
 
-    boolean Clear = true;
+    /*boolean Clear = true;
     public void clear(View view) {
         if (Clear){
             _activity_name =  (EditText) findViewById(R.id.ActivityName);
             _activity_name.setText("");
             Clear = false;
         }
-    }
+    }*/
 
     public void zmienPowtorzenia(View v){
         this._powtorzenia = !this._powtorzenia;
@@ -73,12 +73,12 @@ public class CreateExerciseActivity extends AppCompatActivity {
     }
 
     public String getActivityName(){
-        _activity_name =  (EditText) findViewById(R.id.ActivityName);
+        _activity_name = findViewById(R.id.ActivityName);
         return _activity_name.getText().toString();
     }
 
     public String getActivityCategory(){
-        _activity_category = (Spinner)findViewById(R.id.category);
+        _activity_category = findViewById(R.id.category);
         return _activity_category.getSelectedItem().toString();
     }
 }
