@@ -3,16 +3,20 @@ package project.embraceyourlife;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class DaySchedule extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView data_wybranego_dnia_day;
-
+    LinearLayout scroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +24,24 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);
+
+        scroll = (LinearLayout) findViewById(R.id.scroll);
+
+        addEvent("XD");
+        addEvent("XDD");
+    }
+
+    public void addEvent(String napis){
+        LayoutInflater layoutInflater =
+                (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View addView = layoutInflater.inflate(R.layout.layout_exercise, null);
+        final TextView nazwa = (TextView)addView.findViewById(R.id.Nazwa);
+        final TextView czas = (TextView)addView.findViewById(R.id.Czas);
+        final TextView opis = (TextView)addView.findViewById(R.id.Opis);
+        nazwa.setText("nazwa");
+        czas.setText("czas");
+        opis.setText("opis");
+        scroll.addView(addView);
     }
 
     @Override
@@ -45,10 +67,10 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     }
 
     public void akcjeButton(){
-
+            addEvent("XD");
     }
     public void kalendarzButton(){
-
+        addEvent("XD");
     }
     public void wolne_terminyButton(){
 
