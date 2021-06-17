@@ -130,7 +130,7 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
-        Cursor cursor =db.query("Wydarzenie",columns,null,null,null,null,"Data");
+        Cursor cursor =db.query("Wydarzenie",columns,null,null,null,null,null);
         StringBuffer buffer= new StringBuffer();
         List<Wydarzenie> templist = null;
         while (cursor.moveToNext())
@@ -148,14 +148,17 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-//    public  int deleteFromCwiczenie(String ID)
-//    {
-//        SQLiteDatabase db = getWritableDatabase();
-//        String[] whereArgs ={ID};
-//
-//        int count =db.delete("Cwiczenie" ,"ID_Cwiczenia"+" = ?",whereArgs);
-//        return  count;
-//    }
+    public void removeCwiczenie(String nazwa)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] whereArgs ={nazwa};
+        
+        if (cwiczeniaLista != null && cwiczeniaMapa != null) {
+            cwiczeniaMapa.remove(nazwa);
+        }
+
+        db.delete("Cwiczenia" ,"id = ?", whereArgs);
+    }
 
 
 //    public  int deleteFromWydarzenie(String ID)

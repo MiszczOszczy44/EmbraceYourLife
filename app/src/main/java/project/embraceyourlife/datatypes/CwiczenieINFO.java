@@ -12,7 +12,8 @@ public class CwiczenieINFO {
 
 
     // Konstruktor dla bazy danych
-    public CwiczenieINFO(int id, String nazwa, boolean powtorzenia, boolean obciazenie, boolean czas, boolean dystans) {
+    public CwiczenieINFO(int id, String nazwa, boolean powtorzenia,
+                         boolean obciazenie, boolean czas, boolean dystans) {
         this.id = id;
         this.nazwa = nazwa;
         this.powtorzenia = powtorzenia;
@@ -23,7 +24,8 @@ public class CwiczenieINFO {
 
 
     // Konstruktor dla tworzenia nowych ćwiczeń
-    public CwiczenieINFO(String nazwa, boolean powtorzenia, boolean obciazenie, boolean czas, boolean dystans) {
+    public CwiczenieINFO(String nazwa, boolean powtorzenia, boolean obciazenie,
+                         boolean czas, boolean dystans) {
         this.id = -1;
         this.nazwa = nazwa;
         this.powtorzenia = powtorzenia;

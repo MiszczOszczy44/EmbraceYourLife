@@ -82,21 +82,21 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             widok_cwiczen.setVisibility(View.INVISIBLE);
         }
         else{
-            int i = 1;
-            widok_cwiczen.setVisibility(View.VISIBLE);
-            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-            Database baza = new Database(this);
-            List<Database.Cwiczenie> lista_cwiczen = baza.getCwiczenie();
-            for (Database.Cwiczenie cwiczenie: lista_cwiczen) {
-                TextView cwiczenieTekst = new TextView(this);
-                cwiczenieTekst.setText(cwiczenie.Nazwa);
-                cwiczenieTekst.setId(i);
-                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                lista.addView(cwiczenieTekst);
-                ++i;
-            }
+//            int i = 1;
+//            widok_cwiczen.setVisibility(View.VISIBLE);
+//            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+//            Database baza = new Database(this);
+//            List<Database.Cwiczenie> lista_cwiczen = baza.getCwiczenie();
+//            for (Database.Cwiczenie cwiczenie: lista_cwiczen) {
+//                TextView cwiczenieTekst = new TextView(this);
+//                cwiczenieTekst.setText(cwiczenie.Nazwa);
+//                cwiczenieTekst.setId(i);
+//                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
+//                        LinearLayout.LayoutParams.MATCH_PARENT,
+//                        LinearLayout.LayoutParams.WRAP_CONTENT));
+//                lista.addView(cwiczenieTekst);
+//                ++i;
+//            }
         }
     }
 
