@@ -39,4 +39,9 @@ public class TestDatabase {
         CwiczenieINFO poUsunieciu = db.getCwiczenieINFO(nazwaCwiczenia);
         assertEquals(poUsunieciu, null);
     }
+
+    @Test
+    public void insert_getWydarzenie_removeWydarzenie() {
+
+    }
 }

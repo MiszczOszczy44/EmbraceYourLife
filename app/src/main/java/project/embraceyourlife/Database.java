@@ -13,23 +13,6 @@ import java.util.TreeMap;
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-//                  Po pierwszym uruchomieniu bazy danych
-//                  Przejść do onUpgrade()
-//                  i przestawić Cwiczenie i Wydarzenie
-//                  na Cwiczenia i Wydarzenia
-//                  po czym skasować ten komentarz
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 public class Database extends SQLiteOpenHelper {
 
@@ -57,6 +40,10 @@ public class Database extends SQLiteOpenHelper {
 
 
     public void insert(CwiczenieINFO cwiczenie) {
+        cacheCwiczenieINFO();
+        cwiczeniaMapa.put(cwiczenie.nazwa, cwiczenie);
+        cwiczeniaLista.add(cwiczenie);
+
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nazwa", cwiczenie.nazwa);
@@ -81,6 +68,9 @@ public class Database extends SQLiteOpenHelper {
 
 
     private void cacheCwiczenieINFO() {
+        if (cwiczeniaLista != null && cwiczeniaMapa != null)
+            return;
+
         SQLiteDatabase db = getWritableDatabase();
 
         String[] columns = {"id",         "nazwa",        "powtorzenia",
@@ -108,9 +98,6 @@ public class Database extends SQLiteOpenHelper {
     // Jeśli pojawi się nieciągłość w bazie danych wszystko się wywali.
     // Zwraca null jeśli nie ma takiego id w bazie
     public CwiczenieINFO getCwiczenieINFO(int id) {
-        if (cwiczeniaLista == null || cwiczeniaMapa == null)
-            cacheCwiczenieINFO();
-
         if (id >= cwiczeniaLista.size())
             return null;
         return cwiczeniaLista.get(id);
@@ -118,9 +105,6 @@ public class Database extends SQLiteOpenHelper {
 
     // Zwraca null jeśli nie ma ćwiczenia o takiej nazwie w bazie
     public CwiczenieINFO getCwiczenieINFO(String nazwa) {
-        if (cwiczeniaLista == null || cwiczeniaMapa == null)
-            cacheCwiczenieINFO();
-
         return cwiczeniaMapa.get(nazwa);
     }
 
@@ -157,7 +141,7 @@ public class Database extends SQLiteOpenHelper {
             cwiczeniaMapa.remove(nazwa);
         }
 
-        db.delete("Cwiczenia" ,"id = ?", whereArgs);
+        db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
     }
 
 
@@ -200,8 +184,8 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
-            db.execSQL("DROP TABLE Cwiczenie");
-            db.execSQL("DROP TABLE Wydarzenie");
+            db.execSQL("DROP TABLE Cwiczenia");
+            db.execSQL("DROP TABLE Wydarzenia");
             onCreate(db);
         }catch (Exception e) {
         }

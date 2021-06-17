@@ -5,12 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Wydarzenie {
-    private static final SimpleDateFormat formatDaty;
+    public static final SimpleDateFormat formatDaty;
     private static final String prefixTreningu;
     static {
         prefixTreningu = "TRENING::";
-        formatDaty = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-        // d(d)/m(m)/yyyy h(h):mm?
+        formatDaty = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     }
 
     private final int id;
