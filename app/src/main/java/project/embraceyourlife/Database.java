@@ -114,7 +114,7 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
-        Cursor cursor =db.query("Wydarzenie",columns,null,null,null,null,null);
+        Cursor cursor =db.query("Wydarzenia",columns,null,null,null,null,null);
         StringBuffer buffer= new StringBuffer();
         List<Wydarzenie> templist = null;
         while (cursor.moveToNext())

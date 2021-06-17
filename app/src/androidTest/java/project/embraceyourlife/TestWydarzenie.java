@@ -58,5 +58,18 @@ public class TestWydarzenie {
         }
     }
 
+    @Test
+    public void formatDaty_rownosc_rozwiniecie() {
+        String dataString = "2/4/1995 1:45";
+        String oczekiwane = "02/04/1995 01:45";
 
+        try {
+            Date data = Wydarzenie.formatDaty.parse(dataString);
+            String otrzymane = Wydarzenie.formatDaty.format(data);
+
+            Assert.assertEquals(oczekiwane, otrzymane);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
 }
