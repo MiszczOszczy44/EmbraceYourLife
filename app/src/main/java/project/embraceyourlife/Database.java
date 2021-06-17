@@ -124,7 +124,11 @@ public class Database extends SQLiteOpenHelper {
         return cwiczeniaMapa.get(nazwa);
     }
 
-
+    public ArrayList<CwiczenieINFO> getCwiczeniaINFO_id() {
+        if (cwiczeniaLista == null || cwiczeniaMapa == null)
+            cacheCwiczenieINFO();
+        return cwiczeniaLista;
+    }
 
     public List<Wydarzenie> getWydarzenia(String Data)
     {

@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,8 +22,11 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import project.embraceyourlife.datatypes.CwiczenieINFO;
 
 public class TworzenieTreningu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private boolean czy_wydarzenie;
@@ -59,12 +63,11 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             plusik.setVisibility(View.VISIBLE);
 
             LinearLayout lista = findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-            Database baza = new Database(this);
-            List<Database.Cwiczenie> lista_cwiczen = baza.getCwiczenie();
-            for (Database.Cwiczenie cwiczenie: lista_cwiczen) {
+            ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
+            for (CwiczenieINFO cwiczenie: lista_cwiczen) {
                 TextView cwiczenieTekst = new TextView(this);
-                cwiczenieTekst.setText(cwiczenie.Nazwa);
-                cwiczenieTekst.setId(cwiczenie.ID);
+                cwiczenieTekst.setText(cwiczenie.nazwa);
+                cwiczenieTekst.setId(cwiczenie.id);
                 cwiczenieTekst.setClickable(true);
                 cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
 
@@ -77,7 +80,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
 
 
-        addCwiczenie("XD");// można usunąć
+        //addCwiczenie("XD");// można usunąć
 
     }
 
@@ -163,21 +166,20 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             widok_cwiczen.setVisibility(View.INVISIBLE);
         }
         else{
-//            int i = 1;
-//            widok_cwiczen.setVisibility(View.VISIBLE);
-//            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-//            Database baza = new Database(this);
-//            List<Database.Cwiczenie> lista_cwiczen = baza.getCwiczenie();
-//            for (Database.Cwiczenie cwiczenie: lista_cwiczen) {
-//                TextView cwiczenieTekst = new TextView(this);
-//                cwiczenieTekst.setText(cwiczenie.Nazwa);
-//                cwiczenieTekst.setId(i);
-//                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
-//                        LinearLayout.LayoutParams.MATCH_PARENT,
-//                        LinearLayout.LayoutParams.WRAP_CONTENT));
-//                lista.addView(cwiczenieTekst);
-//                ++i;
-//            }
+            int i = 1;
+            widok_cwiczen.setVisibility(View.VISIBLE);
+            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+            ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
+            for (CwiczenieINFO cwiczenie: lista_cwiczen) {
+                TextView cwiczenieTekst = new TextView(this);
+                cwiczenieTekst.setText(cwiczenie.nazwa);
+                cwiczenieTekst.setId(i);
+                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                lista.addView(cwiczenieTekst);
+                ++i;
+            }
         }
     }
 
