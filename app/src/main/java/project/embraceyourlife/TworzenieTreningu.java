@@ -62,7 +62,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             opis_wydarzenia.setVisibility(View.INVISIBLE);
             plusik.setVisibility(View.VISIBLE);
 
-            LinearLayout lista = findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
             ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
             for (CwiczenieINFO cwiczenie: lista_cwiczen) {
                 TextView cwiczenieTekst = new TextView(this);
@@ -77,10 +77,6 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
                 lista.addView(cwiczenieTekst);
             }
         }
-
-
-
-        //addCwiczenie("XD");// można usunąć
 
     }
 
@@ -166,20 +162,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             widok_cwiczen.setVisibility(View.INVISIBLE);
         }
         else{
-            int i = 1;
             widok_cwiczen.setVisibility(View.VISIBLE);
-            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-            ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
-            for (CwiczenieINFO cwiczenie: lista_cwiczen) {
-                TextView cwiczenieTekst = new TextView(this);
-                cwiczenieTekst.setText(cwiczenie.nazwa);
-                cwiczenieTekst.setId(i);
-                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                lista.addView(cwiczenieTekst);
-                ++i;
-            }
         }
     }
 

@@ -162,7 +162,7 @@ public class Database extends SQLiteOpenHelper {
             cwiczeniaMapa.remove(nazwa);
         }
 
-        db.delete("Cwiczenia" ,"id = ?", whereArgs);
+        db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
     }
 
 
