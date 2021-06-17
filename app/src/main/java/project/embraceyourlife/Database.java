@@ -110,13 +110,12 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    public List<Wydarzenie> getWydarzenia(String Data)
+    public ArrayList<Wydarzenie> getWydarzenia(String Data)
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
         Cursor cursor =db.query("Wydarzenia",columns,null,null,null,null,null);
-        StringBuffer buffer= new StringBuffer();
-        List<Wydarzenie> templist = null;
+        ArrayList<Wydarzenie> templist = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext())
         {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
@@ -138,7 +137,10 @@ public class Database extends SQLiteOpenHelper {
         String[] whereArgs ={nazwa};
         
         if (cwiczeniaLista != null && cwiczeniaMapa != null) {
-            cwiczeniaMapa.remove(nazwa);
+            CwiczenieINFO removed = cwiczeniaMapa.remove(nazwa);
+            if (removed.id != -1) {
+                cwiczeniaLista.set(removed.id, null);
+            }
         }
 
         db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
