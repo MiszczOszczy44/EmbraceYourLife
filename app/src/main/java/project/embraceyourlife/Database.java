@@ -62,7 +62,7 @@ public class Database extends SQLiteOpenHelper {
         cv.put("Czas_trwania", wydarzenie.getCzasTrwania());
         cv.put("Data", wydarzenie.getData());
         cv.put("Opis", wydarzenie.getOpis());
-        db.insert("Wydarzenie", null, cv);
+        db.insert("Wydarzenia", null, cv);
     }
 
 
@@ -139,7 +139,7 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] whereArgs ={nazwa};
-        
+
         if (cwiczeniaLista != null && cwiczeniaMapa != null) {
             CwiczenieINFO removed = cwiczeniaMapa.remove(nazwa);
             if (removed.id != -1) {

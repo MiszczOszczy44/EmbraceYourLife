@@ -289,7 +289,6 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
         List<Wydarzenie> lista_wydarzen = Database.getInstance(this).getWydarzenia(data + " " + czas);
         Wydarzenie wydarzenie = lista_wydarzen.get(0);
-        Toast.makeText(getApplicationContext(),wydarzenie.getOpis(),Toast.LENGTH_SHORT);
         startActivity(i);
     }
 
