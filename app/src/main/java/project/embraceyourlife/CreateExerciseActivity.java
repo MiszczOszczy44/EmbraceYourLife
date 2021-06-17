@@ -65,11 +65,11 @@ public class CreateExerciseActivity extends AppCompatActivity {
     }
 
     public void gotoweButtonListener(View v){
-        Database baza = new Database(this);
-        baza.insertIntoCwiczenie(getActivityName(), getActivityCategory(), _powtorzenia, _obciazenia, _czas_trwania, _dystans);
-
-        Intent i = new Intent(this, GymActivity.class);
-        startActivity(i);
+//        Database baza = new Database(this);
+//        baza.insertIntoCwiczenie(getActivityName(), getActivityCategory(), _powtorzenia, _obciazenia, _czas_trwania, _dystans);
+//
+//        Intent i = new Intent(this, GymActivity.class);
+//        startActivity(i);
     }
 
     public String getActivityName(){
