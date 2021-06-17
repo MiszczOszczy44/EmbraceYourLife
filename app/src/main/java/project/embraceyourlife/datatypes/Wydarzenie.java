@@ -52,6 +52,10 @@ public class Wydarzenie {
         }
     }
 
+    public Wydarzenie(String nazwa, String powtarzalnosc, String data, int czasTrwania, String opis) {
+        this(-1, nazwa, powtarzalnosc, data, czasTrwania, opis);
+    }
+
     // Zwraca Stringa reprezentującego datę
     public String getData() {
         return formatDaty.format(data);

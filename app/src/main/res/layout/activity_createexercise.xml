@@ -4,36 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:autofillHints="@string/Nazwa"
     tools:context=".CreateExerciseActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="360dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/ActivityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:onClick="clear"
-            android:text="@string/Nazwij_cwiczenie" />
-
-        <Spinner
-            android:id="@+id/category"
-            android:layout_width="173dp"
-            android:layout_height="45dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    <EditText
+        android:id="@+id/ActivityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="@id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -43,7 +27,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@id/ActivityName">
 
         <Switch
             android:id="@+id/switch1"

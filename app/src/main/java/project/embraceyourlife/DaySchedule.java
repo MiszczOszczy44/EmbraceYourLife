@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+
+import project.embraceyourlife.datatypes.Wydarzenie;
+
 public class DaySchedule extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView data_wybranego_dnia_day;
     LinearLayout scroll;
@@ -27,22 +31,26 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         scroll = (LinearLayout) findViewById(R.id.scroll);
 
 
-
-        addEvent("XDD"); // można usunąć
     }
 
     //metoda dodaje event string w parametrze dla testów
-    public void addEvent(String napis){
+    public void addEvent(Wydarzenie wydarzenie){
         LayoutInflater layoutInflater =
                 (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View addView = layoutInflater.inflate(R.layout.layout_event, null);
         final TextView nazwa = (TextView)addView.findViewById(R.id.Nazwa);
         final TextView czas = (TextView)addView.findViewById(R.id.Czas);
         final TextView opis = (TextView)addView.findViewById(R.id.Opis);
-        nazwa.setText("nazwa");
-        czas.setText("czas");
-        opis.setText("opis");
-        scroll.addView(addView);
+        nazwa.setText(wydarzenie.getNazwa());
+        czas.setText(wydarzenie.getCzasTrwania());
+        opis.setText(wydarzenie.getOpis());
+    }
+
+    public void getAllEvents(String Data){
+        List<Wydarzenie> listaWydarzen = Database.getInstance(this).getWydarzenia(Data);
+        for(Wydarzenie event:listaWydarzen){
+            addEvent(event);
+        }
     }
 
     @Override
@@ -68,10 +76,8 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     }
 
     public void akcjeButton(){
-            addEvent("XD");
     }
     public void kalendarzButton(){
-        addEvent("XD");
     }
     public void wolne_terminyButton(){
 

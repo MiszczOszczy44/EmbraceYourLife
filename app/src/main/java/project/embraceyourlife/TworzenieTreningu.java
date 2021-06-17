@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import project.embraceyourlife.datatypes.CwiczenieINFO;
+import project.embraceyourlife.datatypes.Wydarzenie;
 
 public class TworzenieTreningu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private boolean czy_wydarzenie;
@@ -70,6 +72,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
                 cwiczenieTekst.setId(cwiczenie.id);
                 cwiczenieTekst.setClickable(true);
                 cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
+                cwiczenieTekst.setTextSize(30);
 
                 cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -212,6 +215,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         if(this.czy_wydarzenie){
             i = new Intent(this, DaySchedule.class);
             String opis = ((EditText)findViewById(R.id.OpisWydarzeniaMultiLine)).getText().toString();
+            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, opis);
         }
         else{
             i = new Intent(this, GymActivity.class);

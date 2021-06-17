@@ -29,11 +29,6 @@ public class CreateExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createexercise);
 
-        this._activity_category = findViewById(R.id.category);
-        ArrayAdapter<String> Adapter = new ArrayAdapter<>(CreateExerciseActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Kategoria));
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this._activity_category.setAdapter(Adapter);
     }
 
     /*boolean Clear = true;
@@ -79,8 +74,4 @@ public class CreateExerciseActivity extends AppCompatActivity {
         return _activity_name.getText().toString();
     }
 
-    public String getActivityCategory(){
-        _activity_category = findViewById(R.id.category);
-        return _activity_category.getSelectedItem().toString();
-    }
 }
