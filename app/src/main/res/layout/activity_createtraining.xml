@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="false"
-    android:onClick="schowajOkno"
     android:windowSoftInputMode="stateHidden"
     tools:context=".TworzenieTreningu">
 
@@ -28,10 +27,9 @@
 
     <ScrollView
         android:id="@+id/ListaCwiczenWTreninguScroll"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/GotoweTrening"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/PlanTreningu_OpisWydarzeniaText">
@@ -188,13 +186,12 @@
         android:id="@+id/GotoweTrening"
         android:layout_width="397dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="16dp"
         android:onClick="wrocDoGym"
         android:text="@string/Gotowe"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ListaCwiczenWTreninguScroll" />
 
     <LinearLayout
         android:id="@+id/OknoNowegoCwiczeniaWTreningu"
@@ -225,6 +222,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/RzadPowtorzen"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -257,6 +255,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/RzadObciazenia"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -289,6 +288,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/RzadCzasu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -321,6 +321,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/RzadDystansu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -392,13 +393,6 @@
                 android:layout_weight="4"
                 android:text="@string/Nazwa" />
 
-            <TextView
-                android:id="@+id/CwiczeniaWTreninguKategoria"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center_horizontal"
-                android:text="@string/kategoria" />
         </LinearLayout>
 
         <ScrollView

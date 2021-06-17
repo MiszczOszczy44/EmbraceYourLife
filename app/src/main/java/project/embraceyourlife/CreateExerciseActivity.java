@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import project.embraceyourlife.datatypes.CwiczenieINFO;
+
 public class CreateExerciseActivity extends AppCompatActivity {
 
     private EditText _activity_name;
@@ -27,11 +29,6 @@ public class CreateExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createexercise);
 
-        this._activity_category = findViewById(R.id.category);
-        ArrayAdapter<String> Adapter = new ArrayAdapter<>(CreateExerciseActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Kategoria));
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this._activity_category.setAdapter(Adapter);
     }
 
     /*boolean Clear = true;
@@ -65,11 +62,11 @@ public class CreateExerciseActivity extends AppCompatActivity {
     }
 
     public void gotoweButtonListener(View v){
-//        Database baza = new Database(this);
-//        baza.insertIntoCwiczenie(getActivityName(), getActivityCategory(), _powtorzenia, _obciazenia, _czas_trwania, _dystans);
-//
-//        Intent i = new Intent(this, GymActivity.class);
-//        startActivity(i);
+        CwiczenieINFO Cwiczenie = new CwiczenieINFO(getActivityName(), _powtorzenia, _obciazenia, _czas_trwania, _dystans);
+        Database.getInstance(this).insert(Cwiczenie);
+
+        Intent i = new Intent(this, GymActivity.class);
+        startActivity(i);
     }
 
     public String getActivityName(){
@@ -77,8 +74,4 @@ public class CreateExerciseActivity extends AppCompatActivity {
         return _activity_name.getText().toString();
     }
 
-    public String getActivityCategory(){
-        _activity_category = findViewById(R.id.category);
-        return _activity_category.getSelectedItem().toString();
-    }
 }
