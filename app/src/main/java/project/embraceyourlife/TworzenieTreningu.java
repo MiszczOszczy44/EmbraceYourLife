@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class TworzenieTreningu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private boolean czy_wydarzenie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         powtarzalnoscSpinner();
 
         Intent i = getIntent();
-        boolean czy_wydarzenie = i.getBooleanExtra("czy_wydarzenie", false);
+        this.czy_wydarzenie = i.getBooleanExtra("czy_wydarzenie", false);
         ScrollView scroll = (ScrollView) findViewById(R.id.ListaCwiczenWTreninguScroll);
         TextView opis_wydarzenia = (TextView) findViewById(R.id.editTextTextMultiLine);
         if(czy_wydarzenie) {
@@ -44,7 +45,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         }
         else {
             scroll.setVisibility(View.VISIBLE);
-            opis_wydarzenia.setVisibility(View.VISIBLE);
+            opis_wydarzenia.setVisibility(View.INVISIBLE);
         }
 
         LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
@@ -61,6 +62,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             lista.addView(cwiczenieTekst);
         }
+
     }
 
 
