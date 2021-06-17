@@ -14,14 +14,17 @@
         android:layout_height="330dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/data" />
 
     <TextView
         android:id="@+id/data"
         android:layout_width="387dp"
         android:layout_height="58dp"
-        android:text="TextView"
+        android:layout_marginTop="88dp"
+        android:gravity="center"
+        android:text="Wybierz datę"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/kalendarz"
         app:layout_constraintStart_toStartOf="@+id/kalendarz"
-        app:layout_constraintTop_toBottomOf="@+id/kalendarz" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
