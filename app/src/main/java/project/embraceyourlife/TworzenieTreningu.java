@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,12 +26,15 @@ import java.util.List;
 
 public class TworzenieTreningu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private boolean czy_wydarzenie;
+    LinearLayout scrollDoCwiczen;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createtraining);
         powtarzalnoscSpinner();
+
+        scrollDoCwiczen = (LinearLayout) findViewById(R.id.Cwiczenia);
 
         Intent i = getIntent();
         this.czy_wydarzenie = i.getBooleanExtra("czy_wydarzenie", false);
@@ -70,6 +75,10 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             }
         }
 
+
+
+        addCwiczenie("XD");// można usunąć
+
     }
 
 
@@ -80,6 +89,32 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         timePicker[0] = new TimePickerDialog(TworzenieTreningu.this,
                 (view, hourOfDay, minute) -> TimeSelect.setText(hourOfDay + ":" + minute), 0, 0, true);
         timePicker[0].show();
+    }
+
+    // Ta komenda dodaje ćwiczenie string w parametrach jest dla testów
+    public void addCwiczenie(String napis){
+        LayoutInflater layoutInflater =
+                (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View addView = layoutInflater.inflate(R.layout.layout_exercise, null);
+        final TextView nazwacwiczenia = (TextView)addView.findViewById(R.id.nazwacwiczenia);
+        final TextView czas = (TextView)addView.findViewById(R.id.czas);
+        final TextView dystans = (TextView)addView.findViewById(R.id.dystans);
+        final TextView powtorzenia = (TextView)addView.findViewById(R.id.powtorzenia);
+        final TextView ciezar = (TextView)addView.findViewById(R.id.ciezar);
+        final TextView czasliczba = (TextView)addView.findViewById(R.id.czasLiczba);
+        final TextView dystansliczba = (TextView)addView.findViewById(R.id.dystansLiczba);
+        final TextView powtorzenialiczba = (TextView)addView.findViewById(R.id.powtorzeniaLiczba);
+        final TextView ciezarliczba = (TextView)addView.findViewById(R.id.ciezarLiczba);
+        nazwacwiczenia.setText("Nazwa");
+        czas.setText("Czas:");
+        dystans.setText("Dystans:");
+        powtorzenia.setText("Powtórzenia:");
+        ciezar.setText("Ciężar:");
+        czasliczba.setText("0");
+        dystansliczba.setText("0");
+        powtorzenialiczba.setText("0");
+        ciezarliczba.setText("0");
+        scrollDoCwiczen.addView(addView);
     }
 
 

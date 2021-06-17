@@ -26,14 +26,16 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
 
         scroll = (LinearLayout) findViewById(R.id.scroll);
 
-        addEvent("XD");
-        addEvent("XDD");
+
+
+        addEvent("XDD"); // można usunąć
     }
 
+    //metoda dodaje event string w parametrze dla testów
     public void addEvent(String napis){
         LayoutInflater layoutInflater =
                 (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View addView = layoutInflater.inflate(R.layout.layout_exercise, null);
+        final View addView = layoutInflater.inflate(R.layout.layout_event, null);
         final TextView nazwa = (TextView)addView.findViewById(R.id.Nazwa);
         final TextView czas = (TextView)addView.findViewById(R.id.Czas);
         final TextView opis = (TextView)addView.findViewById(R.id.Opis);
