@@ -57,6 +57,10 @@ public class Database extends SQLiteOpenHelper {
 
 
     public void insert(CwiczenieINFO cwiczenie) {
+        cacheCwiczenieINFO();
+        cwiczeniaMapa.put(cwiczenie.nazwa, cwiczenie);
+        cwiczeniaLista.add(cwiczenie);
+
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nazwa", cwiczenie.nazwa);
@@ -81,6 +85,9 @@ public class Database extends SQLiteOpenHelper {
 
 
     private void cacheCwiczenieINFO() {
+        if(cwiczeniaLista != null && cwiczeniaMapa != null)
+            return;
+
         SQLiteDatabase db = getWritableDatabase();
 
         String[] columns = {"id",         "nazwa",        "powtorzenia",
@@ -108,9 +115,6 @@ public class Database extends SQLiteOpenHelper {
     // Jeśli pojawi się nieciągłość w bazie danych wszystko się wywali.
     // Zwraca null jeśli nie ma takiego id w bazie
     public CwiczenieINFO getCwiczenieINFO(int id) {
-        if (cwiczeniaLista == null || cwiczeniaMapa == null)
-            cacheCwiczenieINFO();
-
         if (id >= cwiczeniaLista.size())
             return null;
         return cwiczeniaLista.get(id);
@@ -118,9 +122,6 @@ public class Database extends SQLiteOpenHelper {
 
     // Zwraca null jeśli nie ma ćwiczenia o takiej nazwie w bazie
     public CwiczenieINFO getCwiczenieINFO(String nazwa) {
-        if (cwiczeniaLista == null || cwiczeniaMapa == null)
-            cacheCwiczenieINFO();
-
         return cwiczeniaMapa.get(nazwa);
     }
 
