@@ -13,23 +13,6 @@ import java.util.TreeMap;
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-//                  Po pierwszym uruchomieniu bazy danych
-//                  Przejść do onUpgrade()
-//                  i przestawić Cwiczenie i Wydarzenie
-//                  na Cwiczenia i Wydarzenia
-//                  po czym skasować ten komentarz
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 public class Database extends SQLiteOpenHelper {
 
@@ -79,13 +62,13 @@ public class Database extends SQLiteOpenHelper {
         cv.put("Czas_trwania", wydarzenie.getCzasTrwania());
         cv.put("Data", wydarzenie.getData());
         cv.put("Opis", wydarzenie.getOpis());
-        db.insert("Wydarzenie", null, cv);
+        db.insert("Wydarzenia", null, cv);
     }
 
 
 
     private void cacheCwiczenieINFO() {
-        if(cwiczeniaLista != null && cwiczeniaMapa != null)
+        if (cwiczeniaLista != null && cwiczeniaMapa != null)
             return;
 
         SQLiteDatabase db = getWritableDatabase();
@@ -131,13 +114,12 @@ public class Database extends SQLiteOpenHelper {
         return cwiczeniaLista;
     }
 
-    public List<Wydarzenie> getWydarzenia(String Data)
+    public ArrayList<Wydarzenie> getWydarzenia(String Data)
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
-        Cursor cursor =db.query("Wydarzenie",columns,null,null,null,null,null);
-        StringBuffer buffer= new StringBuffer();
-        List<Wydarzenie> templist = null;
+        Cursor cursor =db.query("Wydarzenia",columns,null,null,null,null,null);
+        ArrayList<Wydarzenie> templist = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext())
         {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
@@ -157,9 +139,12 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] whereArgs ={nazwa};
-        
+
         if (cwiczeniaLista != null && cwiczeniaMapa != null) {
-            cwiczeniaMapa.remove(nazwa);
+            CwiczenieINFO removed = cwiczeniaMapa.remove(nazwa);
+            if (removed.id != -1) {
+                cwiczeniaLista.set(removed.id, null);
+            }
         }
 
         db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
@@ -205,8 +190,8 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
-            db.execSQL("DROP TABLE Cwiczenie");
-            db.execSQL("DROP TABLE Wydarzenie");
+            db.execSQL("DROP TABLE Cwiczenia");
+            db.execSQL("DROP TABLE Wydarzenia");
             onCreate(db);
         }catch (Exception e) {
         }

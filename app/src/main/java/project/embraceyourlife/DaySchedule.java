@@ -5,21 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.Calendar;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Date;
 import java.util.List;
 
 import project.embraceyourlife.datatypes.Wydarzenie;
 
+import static java.lang.String.valueOf;
+
 public class DaySchedule extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView data_wybranego_dnia_day;
+    private String data_danego_dnia;
     LinearLayout scroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +34,13 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_dayschedule);
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);
+        this.data_wybranego_dnia_day = (TextView)findViewById(R.id.data_wybranego_dnia);
+        String pattern = "dd/MM/yyyy HH:MM";
+        this.data_danego_dnia =new SimpleDateFormat(pattern).format(new Date());
+        this.data_wybranego_dnia_day.setText(this.data_danego_dnia);
 
         scroll = (LinearLayout) findViewById(R.id.scroll);
-
+        getAllEvents(this.data_danego_dnia);
 
     }
 
@@ -41,9 +52,17 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         final TextView nazwa = (TextView)addView.findViewById(R.id.Nazwa);
         final TextView czas = (TextView)addView.findViewById(R.id.Czas);
         final TextView opis = (TextView)addView.findViewById(R.id.Opis);
+        LinearLayout lista_wydarzen = findViewById(R.id.scroll);
         nazwa.setText(wydarzenie.getNazwa());
-        czas.setText(wydarzenie.getCzasTrwania());
+        nazwa.setTextColor(Color.WHITE);
+        czas.setText(valueOf(wydarzenie.getCzasTrwania()));
+        czas.setTextColor(Color.WHITE);
         opis.setText(wydarzenie.getOpis());
+        opis.setTextColor(Color.WHITE);
+        lista_wydarzen.addView(addView);
+    }
+
+    public void dodajWydarzenieDoScrollView() {
     }
 
     public void getAllEvents(String Data){
