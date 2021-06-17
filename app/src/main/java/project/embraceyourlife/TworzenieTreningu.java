@@ -27,12 +27,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import project.embraceyourlife.datatypes.Cwiczenie;
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
 
 public class TworzenieTreningu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private boolean czy_wydarzenie;
     LinearLayout scrollDoCwiczen;
+    StringBuilder Cwiczenia;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         TextView opis_wydarzenia = findViewById(R.id.OpisWydarzeniaMultiLine);
         FloatingActionButton plusik = findViewById(R.id.add);
 
+        Cwiczenia = new StringBuilder();
         //wydarzenie
         if(czy_wydarzenie) {
             scroll.setVisibility(View.INVISIBLE);
@@ -94,7 +97,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
     }
 
     // Ta komenda dodaje ćwiczenie string w parametrach jest dla testów
-    public void addCwiczenie(String napis){
+    public void addCwiczenie(String Nazwa,String czasLiczba, String dystansLiczba, String powtorzeniaLiczba, String ciezarLiczba){
         LayoutInflater layoutInflater =
                 (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View addView = layoutInflater.inflate(R.layout.layout_exercise, null);
@@ -107,15 +110,15 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         final TextView dystansliczba = (TextView)addView.findViewById(R.id.dystansLiczba);
         final TextView powtorzenialiczba = (TextView)addView.findViewById(R.id.powtorzeniaLiczba);
         final TextView ciezarliczba = (TextView)addView.findViewById(R.id.ciezarLiczba);
-        nazwacwiczenia.setText("Nazwa");
+        nazwacwiczenia.setText(Nazwa);
         czas.setText("Czas:");
         dystans.setText("Dystans:");
         powtorzenia.setText("Powtórzenia:");
         ciezar.setText("Ciężar:");
-        czasliczba.setText("0");
-        dystansliczba.setText("0");
-        powtorzenialiczba.setText("0");
-        ciezarliczba.setText("0");
+        czasliczba.setText(czasLiczba);
+        dystansliczba.setText(dystansLiczba);
+        powtorzenialiczba.setText(powtorzeniaLiczba);
+        ciezarliczba.setText(ciezarLiczba);
         scrollDoCwiczen.addView(addView);
     }
 
@@ -190,15 +193,59 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
     public void schowajOkno(View v){
         View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
         View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
-        Toast.makeText(this, "Dzialam!", Toast.LENGTH_SHORT).show();
         if(widok_dodawania_cwiczen.getVisibility() == View.VISIBLE){
             widok_dodawania_cwiczen.setVisibility(View.INVISIBLE);
             widok_cwiczen.setVisibility(View.VISIBLE);
+            dodajCwiczenieDoScrollView();
         }
         else if(widok_cwiczen.getVisibility() == View.VISIBLE){
             widok_cwiczen.setVisibility(View.INVISIBLE);
         }
     }
+
+    public void dodajCwiczenieDoScrollView(){
+        StringBuilder napis = new StringBuilder();
+        final EditText Powtarzalnosc = (EditText)findViewById(R.id.NoweCwiczenieWTreninguIlosc1);
+        final EditText Obciazenia = (EditText)findViewById(R.id.NoweCwiczenieWTreninguIlosc2);
+        final EditText Czas = (EditText)findViewById(R.id.NoweCwiczenieWTreninguIlosc3);
+        final EditText Dystans = (EditText)findViewById(R.id.NoweCwiczenieWTreninguIlosc4);
+        final TextView NazwaView = (TextView)findViewById(R.id.NoweCwiczenieWTreninguNazwa);
+        String Nazwa = NazwaView.getText().toString();
+
+        String Pw = Powtarzalnosc.getText().toString();
+        String ob = Obciazenia.getText().toString();
+        String Cz = Czas.getText().toString();
+        String dt = Dystans.getText().toString();
+
+        Powtarzalnosc.setText("");
+        Obciazenia.setText("");
+        Czas.setText("");
+        Dystans.setText("");
+
+        if(!Pw.equals("")){
+            napis.append("Powtarzalnosc");
+            napis.append(Pw);
+            napis.append("\n");
+        }
+        if(!ob.equals("")){
+            napis.append("Obciazenie");
+            napis.append(ob);
+            napis.append("kg\n");
+        }
+        if(!Cz.equals("")){
+            napis.append("Czas");
+            napis.append(Cz);
+            napis.append("min\n");
+        }
+        if(!dt.equals("")){
+            napis.append("Dystans");
+            napis.append(dt);
+            napis.append("m\n\n");
+        }
+        Cwiczenia.append(napis.toString());
+        addCwiczenie(Nazwa,Cz, dt, Pw, ob);
+    }
+
 
 
     public void wrocDoGym(View v){
@@ -215,11 +262,11 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         if(this.czy_wydarzenie){
             i = new Intent(this, DaySchedule.class);
             String opis = ((EditText)findViewById(R.id.OpisWydarzeniaMultiLine)).getText().toString();
-            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, opis);
+            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, opis));
         }
         else{
             i = new Intent(this, GymActivity.class);
-            //z lista cwiczen bedziemy sie pierdolic, jak juz bedzie widok
+            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, Cwiczenia.toString()));
         }
 
         startActivity(i);
