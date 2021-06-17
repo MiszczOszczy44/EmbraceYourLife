@@ -74,8 +74,9 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
                 cwiczenieTekst.setText(cwiczenie.nazwa);
                 cwiczenieTekst.setId(cwiczenie.id);
                 cwiczenieTekst.setClickable(true);
-                cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
                 cwiczenieTekst.setTextSize(30);
+                cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
+
 
                 cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -181,6 +182,8 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         public void onClick(View v) {
             View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
             View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
+            CwiczenieINFO cwiczenie = Database.getInstance(null).getCwiczenieINFO(((TextView)v).getText().toString());
+            ustawWidocznoscAtrybutow(cwiczenie.powtorzenia, cwiczenie.obciazenie, cwiczenie.czas, cwiczenie.dystans);
 
             widok_dodawania_cwiczen.setVisibility(View.VISIBLE);
             widok_cwiczen.setVisibility(View.INVISIBLE);
@@ -189,6 +192,21 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             ((TextView)findViewById(R.id.NoweCwiczenieWTreninguNazwa)).setText(nazwa_cwiczenia);
         }
     };
+
+    public void ustawWidocznoscAtrybutow(boolean powtorzenia, boolean obciazenie, boolean czas, boolean dystans){
+        if(powtorzenia)findViewById(R.id.RzadPowtorzen).setVisibility(View.VISIBLE);
+        else findViewById(R.id.RzadPowtorzen).setVisibility(View.INVISIBLE);
+
+        if(obciazenie)findViewById(R.id.RzadObciazenia).setVisibility(View.VISIBLE);
+        else findViewById(R.id.RzadObciazenia).setVisibility(View.INVISIBLE);
+
+        if(czas)findViewById(R.id.RzadCzasu).setVisibility(View.VISIBLE);
+        else findViewById(R.id.RzadCzasu).setVisibility(View.INVISIBLE);
+
+        if(dystans)findViewById(R.id.RzadDystansu).setVisibility(View.VISIBLE);
+        else findViewById(R.id.RzadDystansu).setVisibility(View.INVISIBLE);
+    }
+
 
     public void schowajOkno(View v){
         View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
