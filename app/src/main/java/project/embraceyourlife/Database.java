@@ -174,14 +174,12 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-//    public  int deleteFromWydarzenie(String ID)
-//    {
-//        SQLiteDatabase db = getWritableDatabase();
-//        String[] whereArgs ={ID};
-//
-//        int count =db.delete("Wydarzenie" ,"ID"+" = ?",whereArgs);
-//        return  count;
-//    }
+    public void removeWydarzenie(Wydarzenie wydarzenie) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] whereArgs ={wydarzenie.getNazwa(), wydarzenie.getData(), wydarzenie.getOpis()};
+        db.delete("Wydarzenia", "nazwa LIKE ? AND data LIKE ? AND opis LIKE ?", whereArgs);
+    }
 
 
     public void onCreate(SQLiteDatabase db) {
