@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="plan_dniaListener"
-            android:text="@string/Plan_tygodnia" />
+            android:text="Plan_dnia" />
 
     </LinearLayout>
 

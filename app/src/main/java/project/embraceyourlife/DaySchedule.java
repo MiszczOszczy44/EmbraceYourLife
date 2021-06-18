@@ -36,6 +36,7 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);
         this.data_wybranego_dnia_day = (TextView)findViewById(R.id.data_wybranego_dnia);
+        this.data_wybranego_dnia_day.setTextSize(30);
         Intent i = getIntent();
         String otrzymana_data = i.getStringExtra("data");
 

@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/data_wybranego_dnia"
             android:layout_width="413dp"
-            android:layout_height="22dp"
+            android:layout_height="40dp"
             android:gravity="center"
             android:text="nie pobrana data"
             app:layout_constraintEnd_toEndOf="parent"
