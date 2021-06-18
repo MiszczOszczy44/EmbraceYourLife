@@ -27,6 +27,7 @@ import static java.lang.String.valueOf;
 public class DaySchedule extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView data_wybranego_dnia_day;
     private String data_danego_dnia;
+    public Context context = this;
     LinearLayout scroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,8 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         opis.setText(wydarzenie.getOpis());
         opis.setTextColor(Color.WHITE);
         lista_wydarzen.addView(addView);
+        //addView.setOnClickListener();
+        addView.setOnLongClickListener(usunWydarzenie);
     }
 
     public void dodajWydarzenieDoScrollView() {
@@ -80,6 +83,19 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
             addEvent(event);
         }
     }
+
+    public View.OnLongClickListener usunWydarzenie = new View.OnLongClickListener(){
+        @Override
+        public boolean onLongClick(View v) {
+            String nazwa = ((TextView)v.findViewById(R.id.Nazwa)).getText().toString();
+            String czas = ((TextView)v.findViewById(R.id.Czas)).getText().toString();
+            String opis = ((TextView)v.findViewById(R.id.Opis)).getText().toString();
+
+            Database.getInstance(context).removeWydarzenie(new Wydarzenie(nazwa, "", data_danego_dnia, Integer.parseInt(czas), opis));
+            ((LinearLayout)findViewById(R.id.scroll)).removeView(v);
+            return true;
+        }
+    };
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
