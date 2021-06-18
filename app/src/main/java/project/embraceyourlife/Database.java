@@ -83,11 +83,11 @@ public class Database extends SQLiteOpenHelper {
     public void insert(Wydarzenie wydarzenie) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("Nazwa", wydarzenie.getNazwa());
-        cv.put("Powtarzalnosc", wydarzenie.getPowtarzalnosc());
-        cv.put("Czas_trwania", wydarzenie.getCzasTrwania());
-        cv.put("Data", wydarzenie.getData());
-        cv.put("Opis", wydarzenie.getOpis());
+        cv.put("nazwa", wydarzenie.getNazwa());
+        cv.put("powtarzalnosc", wydarzenie.getPowtarzalnosc());
+        cv.put("czas_trwania", wydarzenie.getCzasTrwania());
+        cv.put("data", wydarzenie.getData());
+        cv.put("opis", wydarzenie.getOpis());
         db.insert("Wydarzenia", null, cv);
     }
 

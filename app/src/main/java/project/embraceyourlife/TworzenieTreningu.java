@@ -314,9 +314,6 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             i = new Intent(this, GymActivity.class);
             Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, Cwiczenia.toString()));
         }
-
-        List<Wydarzenie> lista_wydarzen = Database.getInstance(this).getWydarzenia(data + " " + czas);
-        Wydarzenie wydarzenie = lista_wydarzen.get(0);
         startActivity(i);
     }
 
