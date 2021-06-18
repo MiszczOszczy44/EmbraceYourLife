@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -87,11 +88,10 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         }
     }
 
-    public void wyczyscListCwiczen() {
+    public void usunWidok(View v) {
         LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-        for(int j = 0; j<lista.getChildCount(); j++){
-            lista.removeViewAt(j);
-        }
+        lista.removeView(v);
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -204,8 +204,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         public boolean onLongClick(View v) {
             String nazwa_cwiczenia = ((TextView)v).getText().toString();
             Database.getInstance(context).removeCwiczenie(nazwa_cwiczenia);
-            wyczyscListCwiczen();
-            stworzListeCwiczen();
+            usunWidok(v);
 
             return true; //true sprawia, ze zwykly onClick sie nie odpali
         }
