@@ -42,10 +42,10 @@ public class Database extends SQLiteOpenHelper {
     private CwiczenieINFO findCwiczenieINFO(String nazwaCiwczenia) {
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] columns = {"id",         "nazwaCiwczenia",        "powtorzenia",
+        String[] columns = {"id",         "nazwa",        "powtorzenia",
                             "obciazenie", "czas_trwania", "dystans"};
 
-        Cursor cursor = db.query("Cwiczenia", columns,
+            Cursor cursor = db.query("Cwiczenia", columns,
                 null, new String[]{ "nazwa = " + nazwaCiwczenia },null,null, null);
 
         CwiczenieINFO cwiczenieINFO = null;
@@ -165,6 +165,7 @@ public class Database extends SQLiteOpenHelper {
 
         if (cwiczeniaID != null && cwiczeniaNazwa != null) {
             CwiczenieINFO removed = cwiczeniaNazwa.remove(nazwa);
+            cwiczeniaID.remove(removed.id);
         }
 
         db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
