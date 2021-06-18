@@ -139,7 +139,7 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         String[] whereArgs ={nazwa};
-        
+
         if (cwiczeniaLista != null && cwiczeniaMapa != null) {
             CwiczenieINFO removed = cwiczeniaMapa.remove(nazwa);
             if (removed.id != -1) {
