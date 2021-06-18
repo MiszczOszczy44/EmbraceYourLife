@@ -32,6 +32,7 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_dayschedule);
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);

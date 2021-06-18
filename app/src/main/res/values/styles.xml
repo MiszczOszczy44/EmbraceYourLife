@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+    <!-- Base application theme. -->
+
     <style name="jasnyBackground">
         <item name="android:textColor">#FF000000</item>
         <item name="android:background">#FFFAE3C4</item>

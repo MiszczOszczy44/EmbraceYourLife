@@ -18,6 +18,7 @@ public class GymStatsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_gymstats);
 
         Button statystykiCwiczen = (Button)findViewById(R.id.statystykiCwiczenButton);

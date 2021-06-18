@@ -35,6 +35,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_createtraining);
         powtarzalnoscSpinner();
 

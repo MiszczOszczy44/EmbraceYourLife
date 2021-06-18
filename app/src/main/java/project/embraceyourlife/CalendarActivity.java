@@ -31,6 +31,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getSupportActionBar().hide();
         setContentView(R.layout.activity_calendar);
 
         calendarView = (CalendarView) findViewById(R.id.kalendarz);
