@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/akcje"
-        android:title="@string/Akcje" />
 
     <item
         android:id="@+id/kalendarz"
         android:title="@string/Kalendarz" />
-
-    <item
-        android:id="@+id/wolne_terminy"
-        android:title="@string/Wolne_terminy" />
 
     <item
         android:id="@+id/silownia"

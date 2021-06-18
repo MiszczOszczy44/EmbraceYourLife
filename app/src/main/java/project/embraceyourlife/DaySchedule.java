@@ -95,7 +95,7 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
             String godz_kon = czas.split(" - ")[1];
             int dlugosc = TimeParser.parse(godz_kon) - TimeParser.parse(godz_pocz);
 
-            Database.getInstance(context).removeWydarzenie(new Wydarzenie(nazwa, "", data_danego_dnia + godz_pocz, dlugosc, opis));
+            Database.getInstance(context).removeWydarzenie(new Wydarzenie(nazwa, "", data_danego_dnia + " " +godz_pocz, dlugosc, opis));
             ((LinearLayout)findViewById(R.id.scroll)).removeView(v);
             return true;
         }
@@ -104,14 +104,8 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.akcje:
-                akcjeButton();
-                return true;
             case R.id.kalendarz:
                 kalendarzButton();
-                return true;
-            case R.id.wolne_terminy:
-                wolne_terminyButton();
                 return true;
             case R.id.silownia:
                 silowniaButton();
@@ -123,14 +117,9 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         return false;
     }
 
-    public void akcjeButton(){
-    }
     public void kalendarzButton(){
         Intent i = new Intent(this, CalendarActivity.class);
         startActivity(i);
-    }
-    public void wolne_terminyButton(){
-
     }
     public void silowniaButton(){
         Intent i = new Intent(this, GymActivity.class);
