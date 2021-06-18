@@ -140,7 +140,7 @@ public class Database extends SQLiteOpenHelper {
 
     public ArrayList<Wydarzenie> getWydarzenia(String data)
     {
-        data = DateParser.truncTime(data);
+        //data = DateParser.truncTime(data);
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
         Cursor cursor = db.query("Wydarzenia",columns, "data LIKE ?",new String[]{ data + "%" },null,null,null);

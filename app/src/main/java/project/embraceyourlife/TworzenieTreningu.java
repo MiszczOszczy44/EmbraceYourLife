@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
-import java.util.List;
 
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
@@ -174,9 +172,6 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         }
     }
 
-    public void noweCwiczenie(View v){
-
-    }
 
     public View.OnClickListener dodajSpecyfikacjeCwiczenia = new View.OnClickListener() {
         @Override
@@ -293,11 +288,11 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
     public void wrocDoGym(View v){
         //Powrot do aktywnosci silowni lub dayschedule
-        //Trzeba bedzie jeszcze zapisac trening do bazy
         Intent i;
 
         String nazwa= ((EditText)findViewById(R.id.editNazwa)).getText().toString();
-        String powtarzalnosc = ((Spinner)findViewById(R.id.spinnerPowtarzalnosc)).getSelectedItem().toString();
+        //String powtarzalnosc = ((Spinner)findViewById(R.id.spinnerPowtarzalnosc)).getSelectedItem().toString();
+        int dlugosc_trwania= Integer.parseInt(((EditText)findViewById(R.id.CzasTrwaniaEditText)).getText().toString());
         String czas = ((EditText)findViewById(R.id.editCzas)).getText().toString();
         String data = ((EditText)findViewById(R.id.editData)).getText().toString();
         //opis wydarzenia lub lista cwiczen jest w ifie
@@ -305,11 +300,11 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         if(this.czy_wydarzenie){
             i = new Intent(this, DaySchedule.class);
             String opis = ((EditText)findViewById(R.id.OpisWydarzeniaMultiLine)).getText().toString();
-            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, opis));
+            Database.getInstance(this).insert(new Wydarzenie(nazwa, "", data + " " + czas, dlugosc_trwania, opis));
         }
         else{
             i = new Intent(this, GymActivity.class);
-            Database.getInstance(this).insert(new Wydarzenie(nazwa, powtarzalnosc, data + " " + czas, 0, Cwiczenia.toString()));
+            Database.getInstance(this).insert(new Wydarzenie(nazwa, "", data + " " + czas, dlugosc_trwania, Cwiczenia.toString()));
         }
         startActivity(i);
     }

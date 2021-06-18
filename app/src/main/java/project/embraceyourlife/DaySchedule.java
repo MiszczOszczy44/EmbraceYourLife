@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.util.Calendar;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import project.embraceyourlife.datatypes.Wydarzenie;
+import project.embraceyourlife.parsers.TimeParser;
 
 import static java.lang.String.valueOf;
 
@@ -40,11 +40,11 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         String otrzymana_data = i.getStringExtra("data");
 
         if(otrzymana_data == null) {
-            String pattern = "dd/MM/yyyy HH:MM";
+            String pattern = "dd/MM/yyyy";
             this.data_danego_dnia = new SimpleDateFormat(pattern).format(new Date());
         }
         else{
-            this.data_danego_dnia = otrzymana_data + " 21:37";
+            this.data_danego_dnia = otrzymana_data;
         }
         this.data_wybranego_dnia_day.setText(this.data_danego_dnia);
 
@@ -65,7 +65,10 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         LinearLayout lista_wydarzen = findViewById(R.id.scroll);
         nazwa.setText(wydarzenie.getNazwa());
         nazwa.setTextColor(Color.WHITE);
-        czas.setText(valueOf(wydarzenie.getCzasTrwania()));
+        String godzina_poczatkowa = wydarzenie.getData().split(" ")[1];
+        int czas_trwania = wydarzenie.getCzasTrwania();
+        String godzina_koncowa = TimeParser.format(TimeParser.parse(godzina_poczatkowa) + czas_trwania);
+        czas.setText(godzina_poczatkowa + " - " + godzina_koncowa);
         czas.setTextColor(Color.WHITE);
         opis.setText(wydarzenie.getOpis());
         opis.setTextColor(Color.WHITE);
@@ -74,8 +77,6 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         addView.setOnLongClickListener(usunWydarzenie);
     }
 
-    public void dodajWydarzenieDoScrollView() {
-    }
 
     public void getAllEvents(String Data){
         List<Wydarzenie> listaWydarzen = Database.getInstance(this).getWydarzenia(Data);
@@ -90,8 +91,11 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
             String nazwa = ((TextView)v.findViewById(R.id.Nazwa)).getText().toString();
             String czas = ((TextView)v.findViewById(R.id.Czas)).getText().toString();
             String opis = ((TextView)v.findViewById(R.id.Opis)).getText().toString();
+            String godz_pocz = czas.split(" - ")[0];
+            String godz_kon = czas.split(" - ")[1];
+            int dlugosc = TimeParser.parse(godz_kon) - TimeParser.parse(godz_pocz);
 
-            Database.getInstance(context).removeWydarzenie(new Wydarzenie(nazwa, "", data_danego_dnia, Integer.parseInt(czas), opis));
+            Database.getInstance(context).removeWydarzenie(new Wydarzenie(nazwa, "", data_danego_dnia + godz_pocz, dlugosc, opis));
             ((LinearLayout)findViewById(R.id.scroll)).removeView(v);
             return true;
         }
