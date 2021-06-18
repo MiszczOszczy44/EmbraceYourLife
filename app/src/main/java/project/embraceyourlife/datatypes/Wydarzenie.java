@@ -4,13 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import project.embraceyourlife.parsers.DateParser;
+
 public class Wydarzenie {
-    public static final SimpleDateFormat formatDaty;
-    private static final String prefixTreningu;
-    static {
-        prefixTreningu = "TRENING::";
-        formatDaty = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    }
+    private static final String prefixTreningu = "TRENING::";
+
 
     private final int id;
     private final String nazwa;
@@ -26,14 +24,7 @@ public class Wydarzenie {
         this.id = id;
         this.nazwa = nazwa;
         this.powtarzalnosc = powtarzalnosc;
-        Date dataTMP;
-        try {
-            dataTMP = formatDaty.parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            dataTMP = new Date(0);
-        }
-        this.data = dataTMP;
+        this.data = DateParser.parse(data);
         this.czasTrwania = czasTrwania;
 
         // Jeśli wydarzenie jest treningiem
@@ -58,7 +49,7 @@ public class Wydarzenie {
 
     // Zwraca Stringa reprezentującego datę
     public String getData() {
-        return formatDaty.format(data);
+        return DateParser.format(data);
     }
 
     // zwraca opis wydarzenia

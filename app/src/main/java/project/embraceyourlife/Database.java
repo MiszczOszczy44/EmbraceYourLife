@@ -165,6 +165,7 @@ public class Database extends SQLiteOpenHelper {
 
         if (cwiczeniaID != null && cwiczeniaNazwa != null) {
             CwiczenieINFO removed = cwiczeniaNazwa.remove(nazwa);
+            cwiczeniaID.remove(removed.id);
         }
 
         db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);

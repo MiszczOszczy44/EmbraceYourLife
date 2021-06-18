@@ -1,4 +1,4 @@
-package project.embraceyourlife;
+package project.embraceyourlife.parsers;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,21 +7,28 @@ import java.util.Date;
 
 import project.embraceyourlife.datatypes.Wydarzenie;
 
-public class TestWydarzenie {
+public class TestDateParser {
 
     @Test
-    public void formatDaty_rownosc() {
-        String dataString = "12/04/1995 1:45";
+    public void parse_format_rownosc() {
+        String wejscie = "12/04/1995 01:45";
         String oczekiwane = "12/04/1995 01:45";
 
-        try {
-            Date data = Wydarzenie.formatDaty.parse(dataString);
-            String otrzymane = Wydarzenie.formatDaty.format(data);
+        Date data = DateParser.parse(wejscie);
+        String otrzymane = DateParser.format(data);
 
-            Assert.assertEquals(oczekiwane, otrzymane);
-        } catch (Exception e) {
-            Assert.fail();
-        }
+        Assert.assertEquals(oczekiwane, otrzymane);
+    }
+
+    @Test
+    public void parse_format_rownosc_rozwiniecie() {
+        String wejscie = "2/4/1995 1:45";
+        String oczekiwane = "02/04/1995 01:45";
+
+        Date data = DateParser.parse(wejscie);
+        String otrzymane = DateParser.format(data);
+
+        Assert.assertEquals(oczekiwane, otrzymane);
     }
 
     @Test
@@ -58,18 +65,5 @@ public class TestWydarzenie {
         }
     }
 
-    @Test
-    public void formatDaty_rownosc_rozwiniecie() {
-        String dataString = "2/4/1995 1:45";
-        String oczekiwane = "02/04/1995 01:45";
 
-        try {
-            Date data = Wydarzenie.formatDaty.parse(dataString);
-            String otrzymane = Wydarzenie.formatDaty.format(data);
-
-            Assert.assertEquals(oczekiwane, otrzymane);
-        } catch (Exception e) {
-            Assert.fail();
-        }
-    }
 }
