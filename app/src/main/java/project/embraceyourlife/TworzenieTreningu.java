@@ -35,6 +35,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
     private boolean czy_wydarzenie;
     LinearLayout scrollDoCwiczen;
     StringBuilder Cwiczenia;
+    Context context = this.context;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,26 +68,36 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
             opis_wydarzenia.setVisibility(View.INVISIBLE);
             plusik.setVisibility(View.VISIBLE);
 
-            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-            ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
-            for (CwiczenieINFO cwiczenie: lista_cwiczen) {
-                TextView cwiczenieTekst = new TextView(this);
-                cwiczenieTekst.setText(cwiczenie.nazwa);
-                cwiczenieTekst.setId(cwiczenie.id);
-                cwiczenieTekst.setClickable(true);
-                cwiczenieTekst.setTextSize(30);
-                cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
-
-
-                cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                lista.addView(cwiczenieTekst);
-            }
+            stworzListeCwiczen();
         }
 
     }
 
+    public void stworzListeCwiczen(){
+        LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+        ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
+        for (CwiczenieINFO cwiczenie: lista_cwiczen) {
+            TextView cwiczenieTekst = new TextView(this);
+            cwiczenieTekst.setText(cwiczenie.nazwa);
+            cwiczenieTekst.setId(cwiczenie.id);
+            cwiczenieTekst.setClickable(true);
+            cwiczenieTekst.setTextSize(30);
+            cwiczenieTekst.setOnClickListener(dodajSpecyfikacjeCwiczenia);
+            cwiczenieTekst.setOnLongClickListener(this.usunCwiczenie);
+
+            cwiczenieTekst.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            lista.addView(cwiczenieTekst);
+        }
+    }
+
+    public void wyczyscListCwiczen() {
+        LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+        for(int j = 0; j<lista.getChildCount(); j++){
+            lista.removeViewAt(j);
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     public void timePicker(View v) {
@@ -182,7 +193,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         public void onClick(View v) {
             View widok_dodawania_cwiczen = findViewById(R.id.OknoNowegoCwiczeniaWTreningu);
             View widok_cwiczen = findViewById(R.id.OknoCwiczenWTreningu);
-            CwiczenieINFO cwiczenie = Database.getInstance(null).getCwiczenieINFO(((TextView)v).getText().toString());
+            CwiczenieINFO cwiczenie = Database.getInstance(context).getCwiczenieINFO(((TextView)v).getText().toString());
             ustawWidocznoscAtrybutow(cwiczenie.powtorzenia, cwiczenie.obciazenie, cwiczenie.czas, cwiczenie.dystans);
 
             widok_dodawania_cwiczen.setVisibility(View.VISIBLE);
@@ -190,6 +201,18 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
             String nazwa_cwiczenia = ((TextView)v).getText().toString();
             ((TextView)findViewById(R.id.NoweCwiczenieWTreninguNazwa)).setText(nazwa_cwiczenia);
+        }
+    };
+
+    public View.OnLongClickListener usunCwiczenie = new View.OnLongClickListener(){
+        @Override
+        public boolean onLongClick(View v) {
+            String nazwa_cwiczenia = ((TextView)v).getText().toString();
+            Database.getInstance(context).removeCwiczenie(nazwa_cwiczenia);
+            wyczyscListCwiczen();
+            stworzListeCwiczen();
+
+            return true; //true sprawia, ze zwykly onClick sie nie odpali
         }
     };
 
@@ -240,23 +263,25 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         Czas.setText("");
         Dystans.setText("");
 
+        napis.append(Nazwa);
+        napis.append("\n");
         if(!Pw.equals("")){
-            napis.append("Powtarzalnosc");
+            napis.append("Powtarzalnosc ");
             napis.append(Pw);
             napis.append("\n");
         }
         if(!ob.equals("")){
-            napis.append("Obciazenie");
+            napis.append("Obciazenie ");
             napis.append(ob);
             napis.append("kg\n");
         }
         if(!Cz.equals("")){
-            napis.append("Czas");
+            napis.append("Czas ");
             napis.append(Cz);
             napis.append("min\n");
         }
         if(!dt.equals("")){
-            napis.append("Dystans");
+            napis.append("Dystans ");
             napis.append(dt);
             napis.append("m\n\n");
         }
