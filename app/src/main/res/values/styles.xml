@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="jasnyBackground">
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:background">#FFFAE3C4</item>
+    </style>
+
+    <style name="ciemnyBackground">
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:background">#FFAD957C</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

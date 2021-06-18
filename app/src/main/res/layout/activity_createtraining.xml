@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/OknoRodzica"
+    style="@style/jasnyBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="false"
@@ -12,6 +13,7 @@
 
     <EditText
         android:id="@+id/OpisWydarzeniaMultiLine"
+        style="@style/ciemnyBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autofillHints="@string/pusty_string"
@@ -43,6 +45,7 @@
 
     <TextView
         android:id="@+id/textNazwa"
+        style="@style/jasnyBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,6 +58,7 @@
 
     <EditText
         android:id="@+id/editNazwa"
+        style="@style/ciemnyBackground"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
@@ -68,6 +72,7 @@
 
     <TextView
         android:id="@+id/textPowtarzalnosc"
+        style="@style/jasnyBackground"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -78,6 +83,7 @@
 
     <Spinner
         android:id="@+id/spinnerPowtarzalnosc"
+        style="@style/jasnyBackground"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
@@ -88,6 +94,7 @@
 
     <TextView
         android:id="@+id/textCzas"
+        style="@style/jasnyBackground"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -97,6 +104,7 @@
 
     <EditText
         android:id="@+id/editCzas"
+        style="@style/ciemnyBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -124,6 +132,7 @@
 
     <TextView
         android:id="@+id/textData"
+        style="@style/jasnyBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -135,6 +144,7 @@
 
     <EditText
         android:id="@+id/editData"
+        style="@style/ciemnyBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -163,6 +173,7 @@
 
     <TextView
         android:id="@+id/PlanTreningu_OpisWydarzeniaText"
+        style="@style/jasnyBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Plan_treningu"
@@ -205,9 +216,9 @@
 
     <LinearLayout
         android:id="@+id/OknoNowegoCwiczeniaWTreningu"
+        style="@style/ciemnyBackground"
         android:layout_width="280dp"
         android:layout_height="380dp"
-        android:background="#673AB7"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
@@ -220,6 +231,7 @@
 
         <TextView
             android:id="@+id/NoweCwiczenieWTreninguNazwa"
+            style="@style/ciemnyBackground"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
@@ -374,10 +386,10 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/ciemnyBackground"
         android:id="@+id/OknoCwiczenWTreningu"
         android:layout_width="280dp"
         android:layout_height="380dp"
-        android:background="#673AB7"
         android:clickable="true"
         android:focusable="true"
         android:visibility="invisible"
@@ -426,6 +438,7 @@
 
     <EditText
         android:id="@+id/CzasTrwaniaEditText"
+        style="@style/ciemnyBackground"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"

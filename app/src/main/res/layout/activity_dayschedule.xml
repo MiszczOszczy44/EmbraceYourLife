@@ -8,10 +8,12 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/jasnyBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            style="@style/ciemnyBackground"
             android:id="@+id/data_wybranego_dnia"
             android:layout_width="413dp"
             android:layout_height="40dp"
@@ -21,7 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <ScrollView
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
