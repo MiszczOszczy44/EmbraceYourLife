@@ -1,5 +1,7 @@
 package project.embraceyourlife.parsers;
 
+import java.util.Date;
+
 public class TimeParser {
 
     // przyjmuje minuty
@@ -28,5 +30,15 @@ public class TimeParser {
         int godz = Integer.parseInt(tablica[0]);
         int min = Integer.parseInt(tablica[1]);
         return godz*60 + min;
+    }
+
+
+    public static String truncDate(String data) {
+        int space = data.indexOf(' ');
+        return data.substring(space + 1);
+    }
+
+    public static String truncDate(Date data) {
+        return truncDate(DateParser.format(data));
     }
 }

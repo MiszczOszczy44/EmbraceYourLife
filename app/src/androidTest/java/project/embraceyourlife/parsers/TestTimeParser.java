@@ -47,4 +47,24 @@ public class TestTimeParser {
 
         Assert.assertEquals(otrzymane, oczekiwane);
     }
+
+    @Test
+    public void truncDate_string() {
+        String wejscie = "24/03/2021 13:20";
+        String oczekiwane = "13:20";
+
+        String otrzymane = TimeParser.truncDate(wejscie);
+
+        Assert.assertEquals(otrzymane, oczekiwane);
+    }
+
+    @Test
+    public void truncDate_date() {
+        String wejscie = "24/03/2021 13:20";
+        String oczekiwane = "13:20";
+
+        String otrzymane = TimeParser.truncDate(DateParser.parse(wejscie));
+
+        Assert.assertEquals(otrzymane, oczekiwane);
+    }
 }
