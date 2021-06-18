@@ -35,9 +35,18 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
         NavigationView navi_View = findViewById(R.id.nav_view);
         navi_View.setNavigationItemSelectedListener(this);
         this.data_wybranego_dnia_day = (TextView)findViewById(R.id.data_wybranego_dnia);
-        String pattern = "dd/MM/yyyy HH:MM";
-        this.data_danego_dnia =new SimpleDateFormat(pattern).format(new Date());
+        Intent i = getIntent();
+        String otrzymana_data = i.getStringExtra("data");
+
+        if(otrzymana_data == null) {
+            String pattern = "dd/MM/yyyy HH:MM";
+            this.data_danego_dnia = new SimpleDateFormat(pattern).format(new Date());
+        }
+        else{
+            this.data_danego_dnia = otrzymana_data + " 21:37";
+        }
         this.data_wybranego_dnia_day.setText(this.data_danego_dnia);
+
 
         scroll = (LinearLayout) findViewById(R.id.scroll);
         getAllEvents(this.data_danego_dnia);
@@ -75,9 +84,9 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            /*case R.id.akcje:
+            case R.id.akcje:
                 akcjeButton();
-                return true;*/
+                return true;
             case R.id.kalendarz:
                 kalendarzButton();
                 return true;
@@ -97,6 +106,8 @@ public class DaySchedule extends AppCompatActivity implements NavigationView.OnN
     public void akcjeButton(){
     }
     public void kalendarzButton(){
+        Intent i = new Intent(this, CalendarActivity.class);
+        startActivity(i);
     }
     public void wolne_terminyButton(){
 
