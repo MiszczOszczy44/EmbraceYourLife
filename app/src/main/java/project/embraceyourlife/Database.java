@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.TreeMap;
 
 import project.embraceyourlife.datatypes.CwiczenieINFO;
@@ -19,8 +19,8 @@ public class Database extends SQLiteOpenHelper {
     private static Database _instance;
 
 
-    private ArrayList<CwiczenieINFO> cwiczeniaLista;
-    private TreeMap<String, CwiczenieINFO> cwiczeniaMapa;
+    private TreeMap<String, CwiczenieINFO>  cwiczeniaNazwa;
+    private TreeMap<Integer, CwiczenieINFO> cwiczeniaID;
 
 
 
@@ -28,7 +28,7 @@ public class Database extends SQLiteOpenHelper {
     // Trzeba zinkrementować wersję w ostatnim argumencie super() o 1
     private Database(Context context)
     {
-        super(context, "DATABASE", null, 4);
+        super(context, "DATABASE", null, 5);
     }
 
     public static Database getInstance(Context context) {
@@ -39,11 +39,30 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-    public void insert(CwiczenieINFO cwiczenie) {
-        cacheCwiczenieINFO();
-        cwiczeniaMapa.put(cwiczenie.nazwa, cwiczenie);
-        cwiczeniaLista.add(cwiczenie);
+    private CwiczenieINFO findCwiczenieINFO(String nazwaCiwczenia) {
+        SQLiteDatabase db = getWritableDatabase();
 
+        String[] columns = {"id",         "nazwaCiwczenia",        "powtorzenia",
+                            "obciazenie", "czas_trwania", "dystans"};
+
+        Cursor cursor = db.query("Cwiczenia", columns,
+                null, new String[]{ "nazwa = " + nazwaCiwczenia },null,null, null);
+
+        CwiczenieINFO cwiczenieINFO = null;
+        if (cursor.moveToNext())
+        {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String nazwa = cursor.getString(cursor.getColumnIndex("nazwa"));
+            boolean powtorzenia = cursor.getInt(cursor.getColumnIndex("powtorzenia")) == 1;
+            boolean obciazenie  = cursor.getInt(cursor.getColumnIndex("obciazenie")) == 1;
+            boolean czas        = cursor.getInt(cursor.getColumnIndex("czas_trwania")) == 1;
+            boolean dystans     = cursor.getInt(cursor.getColumnIndex("dystans")) == 1;
+            cwiczenieINFO = new CwiczenieINFO(id, nazwa, powtorzenia, obciazenie, czas, dystans);
+        }
+        return cwiczenieINFO;
+    }
+
+    public void insert(CwiczenieINFO cwiczenie) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("nazwa", cwiczenie.nazwa);
@@ -52,6 +71,12 @@ public class Database extends SQLiteOpenHelper {
         cv.put("czas_trwania", cwiczenie.czas);
         cv.put("dystans", cwiczenie.dystans);
         db.insert("Cwiczenia", null, cv);
+
+        if(!cacheCwiczenieINFO()) {
+            CwiczenieINFO tmp = findCwiczenieINFO(cwiczenie.nazwa);
+            cwiczeniaNazwa.put(tmp.nazwa, tmp);
+            cwiczeniaID.put(tmp.id, tmp);
+        }
     }
 
     public void insert(Wydarzenie wydarzenie) {
@@ -66,10 +91,10 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-
-    private void cacheCwiczenieINFO() {
-        if (cwiczeniaLista != null && cwiczeniaMapa != null)
-            return;
+    // Zwraca true jeśli wczytało wszystkie ćwiczenia od nowa
+    private boolean cacheCwiczenieINFO() {
+        if (cwiczeniaID != null && cwiczeniaNazwa != null)
+            return false;
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -77,10 +102,10 @@ public class Database extends SQLiteOpenHelper {
                             "obciazenie", "czas_trwania", "dystans"};
 
         Cursor cursor = db.query("Cwiczenia", columns,
-                null,null,null,null, "id");
+                null,null,null,null, null);
 
-        cwiczeniaLista = new ArrayList<>(cursor.getCount());
-        cwiczeniaMapa = new TreeMap<>();
+        cwiczeniaID = new TreeMap<>();
+        cwiczeniaNazwa = new TreeMap<>();
         while (cursor.moveToNext())
         {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
@@ -90,28 +115,26 @@ public class Database extends SQLiteOpenHelper {
             boolean czas        = cursor.getInt(cursor.getColumnIndex("czas_trwania")) == 1;
             boolean dystans     = cursor.getInt(cursor.getColumnIndex("dystans")) == 1;
             CwiczenieINFO cwiczenieINFO = new CwiczenieINFO(id, nazwa, powtorzenia, obciazenie, czas, dystans);
-            cwiczeniaLista.add(cwiczenieINFO);
-            cwiczeniaMapa.put(cwiczenieINFO.nazwa, cwiczenieINFO);
+            cwiczeniaID.put(cwiczenieINFO.id, cwiczenieINFO);
+            cwiczeniaNazwa.put(cwiczenieINFO.nazwa, cwiczenieINFO);
         }
+        return true;
     }
 
-    // Jeśli pojawi się nieciągłość w bazie danych wszystko się wywali.
     // Zwraca null jeśli nie ma takiego id w bazie
     public CwiczenieINFO getCwiczenieINFO(int id) {
-        if (id >= cwiczeniaLista.size())
-            return null;
-        return cwiczeniaLista.get(id);
+        return cwiczeniaID.get(id);
     }
 
     // Zwraca null jeśli nie ma ćwiczenia o takiej nazwie w bazie
     public CwiczenieINFO getCwiczenieINFO(String nazwa) {
-        return cwiczeniaMapa.get(nazwa);
+        return cwiczeniaNazwa.get(nazwa);
     }
 
-    public ArrayList<CwiczenieINFO> getCwiczeniaINFO_id() {
-        if (cwiczeniaLista == null || cwiczeniaMapa == null)
+    public Collection<CwiczenieINFO> getCwiczeniaINFO() {
+        if (cwiczeniaID == null || cwiczeniaNazwa == null)
             cacheCwiczenieINFO();
-        return cwiczeniaLista;
+        return cwiczeniaID.values();
     }
 
     public ArrayList<Wydarzenie> getWydarzenia(String Data)
@@ -140,11 +163,8 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[] whereArgs ={nazwa};
 
-        if (cwiczeniaLista != null && cwiczeniaMapa != null) {
-            CwiczenieINFO removed = cwiczeniaMapa.remove(nazwa);
-            if (removed.id != -1) {
-                cwiczeniaLista.set(removed.id, null);
-            }
+        if (cwiczeniaID != null && cwiczeniaNazwa != null) {
+            CwiczenieINFO removed = cwiczeniaNazwa.remove(nazwa);
         }
 
         db.delete("Cwiczenia" ,"nazwa = ?", whereArgs);
@@ -176,7 +196,7 @@ public class Database extends SQLiteOpenHelper {
             db.execSQL( // Tworzenie tabeli Ćwiczenia
                 "CREATE TABLE Cwiczenia" +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "nazwa TEXT, " +
+                "nazwa TEXT UNIQUE, " +
                 "powtorzenia BLOB," +
                 "obciazenie BLOB, " +
                 "czas_trwania BLOB, " +

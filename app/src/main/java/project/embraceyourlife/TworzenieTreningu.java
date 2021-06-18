@@ -8,12 +8,10 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -23,11 +21,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import project.embraceyourlife.datatypes.Cwiczenie;
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
 
@@ -75,8 +71,7 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
 
     public void stworzListeCwiczen(){
         LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-        ArrayList<CwiczenieINFO> lista_cwiczen = new ArrayList<CwiczenieINFO>(Database.getInstance(this).getCwiczeniaINFO_id());
-        for (CwiczenieINFO cwiczenie: lista_cwiczen) {
+        for (CwiczenieINFO cwiczenie: Database.getInstance(this).getCwiczeniaINFO()) {
             TextView cwiczenieTekst = new TextView(this);
             cwiczenieTekst.setText(cwiczenie.nazwa);
             cwiczenieTekst.setId(cwiczenie.id);
