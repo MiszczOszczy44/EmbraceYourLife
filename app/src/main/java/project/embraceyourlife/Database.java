@@ -182,10 +182,9 @@ public class Database extends SQLiteOpenHelper {
     public void removeWydarzenie(Wydarzenie wydarzenie) {
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] whereArgs ={wydarzenie.getNazwa(), wydarzenie.getPowtarzalnosc(),
-                             wydarzenie.getData(), wydarzenie.getOpis()};
+        String[] whereArgs ={wydarzenie.getNazwa(), wydarzenie.getData(), wydarzenie.getOpis()};
 
-        db.delete("Wydarzenia", "nazwa LIKE ? AND powtarzalnosc LIKE ? AND data LIKE ? AND opis LIKE ?", whereArgs);
+        db.delete("Wydarzenia", "nazwa LIKE ? AND data LIKE ? AND opis LIKE ?", whereArgs);
     }
 
 
