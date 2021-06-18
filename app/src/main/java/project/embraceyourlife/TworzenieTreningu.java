@@ -289,7 +289,16 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         addCwiczenie(Nazwa,Cz, dt, Pw, ob);
     }
 
-
+    public void anulujDodawania(View v){
+        Intent i;
+        if(this.czy_wydarzenie) {
+            i = new Intent(this, DaySchedule.class);
+        }
+        else{
+            i = new Intent(this, GymActivity.class);
+        }
+        startActivity(i);
+    }
 
     public void wrocDoGym(View v){
         //Powrot do aktywnosci silowni lub dayschedule
