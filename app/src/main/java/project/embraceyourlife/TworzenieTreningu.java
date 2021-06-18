@@ -88,11 +88,6 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         }
     }
 
-    public void usunWidok(View v) {
-        LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
-        lista.removeView(v);
-
-    }
 
     @SuppressLint("SetTextI18n")
     public void timePicker(View v) {
@@ -203,8 +198,10 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         @Override
         public boolean onLongClick(View v) {
             String nazwa_cwiczenia = ((TextView)v).getText().toString();
+            LinearLayout lista = (LinearLayout)findViewById(R.id.CwiczeniaWTreninguScrollViewLayout);
+
             Database.getInstance(context).removeCwiczenie(nazwa_cwiczenia);
-            usunWidok(v);
+            lista.removeView(v);
 
             return true; //true sprawia, ze zwykly onClick sie nie odpali
         }
