@@ -156,6 +156,11 @@ public class Database extends SQLiteOpenHelper {
             Wydarzenie wydarzenie = new Wydarzenie(id, nazwa, powtarzalnosc, data, czasTrwania, opis);
             templist.add(wydarzenie);
         }
+        templist.sort((a, b) -> {
+            if (a.getSortINFO() < b.getSortINFO()) return -1;
+            if (a.getSortINFO() > b.getSortINFO()) return 1;
+            return 0;
+        });
         return templist;
     }
 

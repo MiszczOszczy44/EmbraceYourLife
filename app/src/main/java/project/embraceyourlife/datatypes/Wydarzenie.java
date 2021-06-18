@@ -52,6 +52,10 @@ public class Wydarzenie {
         return DateParser.format(data);
     }
 
+    public long getSortINFO() {
+        return data.getTime();
+    }
+
     // zwraca opis wydarzenia
     // jeśli to trening zwraca zserializowane ćwiczenia
     public String getOpis() {
