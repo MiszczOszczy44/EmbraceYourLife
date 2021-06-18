@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 import project.embraceyourlife.datatypes.Wydarzenie;
+import project.embraceyourlife.parsers.DateParser;
 
 
 public class Database extends SQLiteOpenHelper {
@@ -45,8 +46,8 @@ public class Database extends SQLiteOpenHelper {
         String[] columns = {"id",         "nazwa",        "powtorzenia",
                             "obciazenie", "czas_trwania", "dystans"};
 
-            Cursor cursor = db.query("Cwiczenia", columns,
-                null, new String[]{ "nazwa = " + nazwaCiwczenia },null,null, null);
+        Cursor cursor = db.query("Cwiczenia", columns,
+                "nazwa LIKE ?", new String[]{ nazwaCiwczenia },null,null, null);
 
         CwiczenieINFO cwiczenieINFO = null;
         if (cursor.moveToNext())
@@ -137,18 +138,19 @@ public class Database extends SQLiteOpenHelper {
         return cwiczeniaID.values();
     }
 
-    public ArrayList<Wydarzenie> getWydarzenia(String Data)
+    public ArrayList<Wydarzenie> getWydarzenia(String data)
     {
+        data = DateParser.truncTime(data);
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"id", "nazwa", "powtarzalnosc", "czas_trwania", "data", "opis"};
-        Cursor cursor =db.query("Wydarzenia",columns,null,null,null,null,null);
+        Cursor cursor = db.query("Wydarzenia",columns, "data LIKE ?",new String[]{ data + "%" },null,null,null);
         ArrayList<Wydarzenie> templist = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext())
         {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String nazwa = cursor.getString(cursor.getColumnIndex("nazwa"));
             String powtarzalnosc = cursor.getString(cursor.getColumnIndex("powtarzalnosc"));
-            String data = cursor.getString(cursor.getColumnIndex("data"));
+            data = cursor.getString(cursor.getColumnIndex("data"));
             int czasTrwania = cursor.getInt(cursor.getColumnIndex("czas_trwania"));
             String opis = cursor.getString(cursor.getColumnIndex("opis"));
             Wydarzenie wydarzenie = new Wydarzenie(id, nazwa, powtarzalnosc, data, czasTrwania, opis);

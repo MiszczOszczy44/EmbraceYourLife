@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import project.embraceyourlife.datatypes.Wydarzenie;
-
 public class TestDateParser {
 
     @Test
@@ -32,38 +30,59 @@ public class TestDateParser {
     }
 
     @Test
-    public void formatDaty_dodawanieCzasu() {
-        String dataString = "12/04/1995 12:50";
-        int czasTrwania_minuty = 90;
-        String oczekiwane = "12/04/1995 14:20";
+    public void truncTime_string() {
+        String wejscie = "12/01/2021 13:40";
+        String oczekiwane = "12/01/2021";
 
-        try {
-            Date data = Wydarzenie.formatDaty.parse(dataString);
-            Date nowaData = new Date(data.getTime() + czasTrwania_minuty * 60000);
+        String otrzymane = DateParser.truncTime(wejscie);
 
-            String otrzymane = Wydarzenie.formatDaty.format(nowaData);
-            Assert.assertEquals(otrzymane, oczekiwane);
-        } catch (Exception e) {
-            Assert.fail();
-        }
+        Assert.assertEquals(oczekiwane, otrzymane);
     }
 
     @Test
-    public void formatDaty_dodawanieCzasu_overflow() {
-        String dataString = "12/04/1995 23:50";
-        int czasTrwania_minuty = 90;
-        String oczekiwane = "13/04/1995 01:20";
+    public void truncTime_date() {
+        String data = "12/01/2021 13:40";
+        String oczekiwane = "12/01/2021";
+        Date wejscie = DateParser.parse(data);
 
-        try {
-            Date data = Wydarzenie.formatDaty.parse(dataString);
-            Date nowaData = new Date(data.getTime() + czasTrwania_minuty * 60000);
+        String otrzymane = DateParser.truncTime(wejscie);
 
-            String otrzymane = Wydarzenie.formatDaty.format(nowaData);
-            Assert.assertEquals(otrzymane, oczekiwane);
-        } catch (Exception e) {
-            Assert.fail();
-        }
+        Assert.assertEquals(oczekiwane, otrzymane);
     }
+
+//    @Test
+//    public void formatDaty_dodawanieCzasu() {
+//        String dataString = "12/04/1995 12:50";
+//        int czasTrwania_minuty = 90;
+//        String oczekiwane = "12/04/1995 14:20";
+//
+//        try {
+//            Date data = Wydarzenie.formatDaty.parse(dataString);
+//            Date nowaData = new Date(data.getTime() + czasTrwania_minuty * 60000);
+//
+//            String otrzymane = Wydarzenie.formatDaty.format(nowaData);
+//            Assert.assertEquals(otrzymane, oczekiwane);
+//        } catch (Exception e) {
+//            Assert.fail();
+//        }
+//    }
+//
+//    @Test
+//    public void formatDaty_dodawanieCzasu_overflow() {
+//        String dataString = "12/04/1995 23:50";
+//        int czasTrwania_minuty = 90;
+//        String oczekiwane = "13/04/1995 01:20";
+//
+//        try {
+//            Date data = Wydarzenie.formatDaty.parse(dataString);
+//            Date nowaData = new Date(data.getTime() + czasTrwania_minuty * 60000);
+//
+//            String otrzymane = Wydarzenie.formatDaty.format(nowaData);
+//            Assert.assertEquals(otrzymane, oczekiwane);
+//        } catch (Exception e) {
+//            Assert.fail();
+//        }
+//    }
 
 
 }

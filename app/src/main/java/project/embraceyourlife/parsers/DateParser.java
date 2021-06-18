@@ -24,4 +24,13 @@ public class DateParser {
             return new Date();
         }
     }
+
+    public static String truncTime(String data) {
+        int spacja = data.indexOf(' ');
+        return data.substring(0, spacja);
+    }
+
+    public static String truncTime(Date data) {
+        return truncTime(format(data));
+    }
 }

@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import project.embraceyourlife.datatypes.CwiczenieINFO;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 public class TestDatabase {
@@ -37,7 +38,7 @@ public class TestDatabase {
 
         db.removeCwiczenie(nazwaCwiczenia);
         CwiczenieINFO poUsunieciu = db.getCwiczenieINFO(nazwaCwiczenia);
-        assertEquals(poUsunieciu, null);
+        assertNull(poUsunieciu);
     }
 
     @Test
