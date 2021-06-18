@@ -252,22 +252,22 @@ public class TworzenieTreningu extends AppCompatActivity implements AdapterView.
         napis.append(Nazwa);
         napis.append("\n");
         if(!Pw.equals("")){
-            napis.append("Powtarzalnosc ");
+            napis.append("\t |Powtarzalnosc ");
             napis.append(Pw);
             napis.append("\n");
         }
         if(!ob.equals("")){
-            napis.append("Obciazenie ");
+            napis.append("\t |Obciazenie ");
             napis.append(ob);
             napis.append("kg\n");
         }
         if(!Cz.equals("")){
-            napis.append("Czas ");
+            napis.append("\t |Czas ");
             napis.append(Cz);
             napis.append("min\n");
         }
         if(!dt.equals("")){
-            napis.append("Dystans ");
+            napis.append("\t |Dystans ");
             napis.append(dt);
             napis.append("m\n\n");
         }
